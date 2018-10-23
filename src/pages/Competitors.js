@@ -39,7 +39,10 @@ class Competitors extends React.Component {
                 </thead>
                 <tbody>
                   {men.map(man => (
-                    <tr key={man.id}>
+                    <tr
+                      key={man.id}
+                      data-testid={`row-${man.firstName}-${man.lastName}`}
+                    >
                       <td>{`${man.firstName} ${man.lastName}`}</td>
                       <td>{man.division}</td>
                       <td>{man.affiliate}</td>
@@ -66,7 +69,10 @@ class Competitors extends React.Component {
                 </thead>
                 <tbody>
                   {women.map(woman => (
-                    <tr key={woman.id}>
+                    <tr
+                      key={woman.id}
+                      data-testid={`row-${woman.firstName}-${woman.lastName}`}
+                    >
                       <td>{`${woman.firstName} ${woman.lastName}`}</td>
                       <td>{woman.division}</td>
                       <td>{woman.affiliate}</td>
