@@ -1,0 +1,428 @@
+{
+  "competitors": {
+    "Male": {
+      "jdas231": {
+        "firstName": "Keevan",
+        "lastName": "Dance",
+        "affiliate": "Crossfit Chicago",
+        "division": "RX"
+      },
+      "knasdkjn239asd": {
+        "firstName": "Joey",
+        "lastName": "Dressler",
+        "affiliate": "Crossfit Yuma",
+        "division": "RX"
+      },
+      "jsfsdoice90dslka": {
+        "firstName": "Colby",
+        "lastName": "Carr",
+        "affiliate": "Crossfit Tempe",
+        "division": "RX"
+      },
+      "lkvnjkxcvjnke": {
+        "firstName": "Mike",
+        "lastName": "Fraizer",
+        "affiliate": "Crossfit Yuma",
+        "division": "RX"
+      },
+      "lkmcknsdjnkad": {
+        "firstName": "Bull",
+        "lastName": "Burn",
+        "affiliate": "Crossfit Yuma",
+        "division": "Scaled"
+      },
+      "lknadsknasdkzcx": {
+        "firstName": "Brian",
+        "lastName": "Landeros",
+        "affiliate": "Crossfit Glory",
+        "division": "Scaled"
+      },
+      "kcxzjknckjnasd": {
+        "firstName": "Taylor",
+        "lastName": "Dance",
+        "affiliate": "Crossfit Tempe",
+        "division": "Scaled"
+      }
+    },
+    "Female": {
+      "klasdmk": {
+        "firstName": "Julie",
+        "lastName": "Dance",
+        "affiliate": "Crossfit Yuma",
+        "division": "RX"
+      },
+      "jknasdjkn": {
+        "firstName": "Marilyn",
+        "lastName": "Dance",
+        "affiliate": "Crossfit Yuma",
+        "division": "RX"
+      },
+      "ijreijsdc": {
+        "firstName": "Jeehyae",
+        "lastName": "Lee",
+        "affiliate": "Crossfit Chicago",
+        "division": "Scaled"
+      },
+      "jknsdjnwe": {
+        "firstName": "Gloria",
+        "lastName": "Lopez",
+        "affiliate": "Crossfit Foothills",
+        "division": "Scaled"
+      },
+      "cxjkncxzkjndsa": {
+        "firstName": "Kathy",
+        "lastName": "Seale",
+        "affiliate": "Crossfit Yuma",
+        "division": "Scaled"
+      },
+      "knczjnkxzcjkn": {
+        "firstName": "Alicia",
+        "lastName": "Forgot",
+        "affiliate": "Crossfit Yuma",
+        "division": "RX"
+      },
+      "iqwijwijasd": {
+        "firstName": "Dorie",
+        "lastName": "Rush",
+        "affiliate": "Crossfit Yuma",
+        "division": "RX"
+      }
+    }
+  },
+  "workouts": {
+    "knjakjnsdajnk": {
+      "name": "Wod #1",
+      "type": "Timed",
+      "standards": "Athletes must complete the required repeititions of each movement before moving on. Each clean will begin from the floor, and the repetition will only count once the athlete is fully standing - knees and hips fully extended, bar resting across the shoulders. For the box jump over, the athlete must go up and over the box. For RX/Masters under 50, athletes must jump, no step ups are allowed. For Scaled, athletes may jump or step up. In either case, BOTH feet must touch the top of the box",
+      "rx": [
+        "10 Cleans @ 185/125",
+        "10 Box Jump Overs 24/20",
+        "8 Cleans @ 185/125",
+        "8 Box Jump Overs 24/20",
+        "6 Cleans @ 185/125",
+        "6 Box Jump Overs 24/20"
+      ],
+      "scaled": [
+        "10 Cleans @ 135/85",
+        "10 Box Jump Overs 24/20",
+        "8 Cleans @ 22/105",
+        "8 Box Jump Overs 24/20",
+        "6 Cleans @ 185/125",
+        "6 Box Jump Overs 24/20"
+      ]
+    },
+    "knjadsjknadsjkn": {
+      "name": "Wod #2a",
+      "type": "Timed",
+      "standards": "During the run, the athlete must follow the marked path and stay within the boundaries given. The one minute transition will occur at the end of the five minute time cap. For the 2RM Thurst, the athlete must yada yada yada",
+      "rx": ["800m Run (5 minute time cap)"],
+      "scaled": ["800m Run (5 minute time cap)"]
+    },
+    "cjxznxcnzcxnjkxjknz": {
+      "name": "Wod #2b",
+      "type": "Timed",
+      "standards": "During the run, the athlete must follow the marked path and stay within the boundaries given. The one minute transition will occur at the end of the five minute time cap. For the 2RM Thurst, the athlete must yada yada yada",
+      "rx": ["2RM Thruster (5 minute time cap)"],
+      "scaled": ["2RM Thruster (5 minute time cap)"]
+    },
+    "zcjknczkjnadjknads": {
+      "name": "Wod #3",
+      "type": "Timed",
+      "standards": "All wall balls will be a to a 10 ft target. Athletes must squat to full depth, top of nknee below hip crease, and the ball must clearly make contact with the surface of the target. For the chest to bar pull up, the athlete must fully extend the arms in the bottom position, and make clear contact with the bar at the top of the movement. for scaled the jumping pull up/pull up is complete when the chin of the athelete psses the hksjnsdkjnsadl.",
+      "rx": [
+        "3 Rounds for Time",
+        "21 Wall Balls 20/14",
+        "15 Chest to Bar Pull Ups",
+        "9 Deadlifts 275/185"
+      ],
+      "scaled": [
+        "3 Rounds for Time",
+        "21 Wall Balls 20/14",
+        "15 Pull Ups",
+        "9 Deadlifts 205/145"
+      ]
+    }
+  },
+  "scores": {
+    "kjnasdjknasd": {
+      "competitorId": "jdas231",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "jknasdjnksda": {
+      "competitorId": "jdas231",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "zxknjxzcn": {
+      "competitorId": "jdas231",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "qweknas": {
+      "competitorId": "jdas231",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "zcxklcxn": {
+      "competitorId": "knasdkjn239asd",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "zxcxzcklmzxc": {
+      "competitorId": "knasdkjn239asd",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "lkadskmlasdklm": {
+      "competitorId": "knasdkjn239asd",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "mkcxklmzxc": {
+      "competitorId": "knasdkjn239asd",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "mxzmklxzcklm": {
+      "competitorId": "jsfsdoice90dslka",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "lmczklmzxckl": {
+      "competitorId": "jsfsdoice90dslka",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "klmcklmsdklm": {
+      "competitorId": "jsfsdoice90dslka",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "acklasklmas": {
+      "competitorId": "jsfsdoice90dslka",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "lkmzcxmkxzc": {
+      "competitorId": "lkvnjkxcvjnke",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "kmckmlzxc": {
+      "competitorId": "lkvnjkxcvjnke",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "mlasmklasd": {
+      "competitorId": "lkvnjkxcvjnke",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "cklmzxcklmxcz": {
+      "competitorId": "lkvnjkxcvjnke",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "zxczxczcx": {
+      "competitorId": "lkmcknsdjnkad",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "asdasdasd": {
+      "competitorId": "lkmcknsdjnkad",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "wqeqwewqe": {
+      "competitorId": "lkmcknsdjnkad",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "asascasc": {
+      "competitorId": "lkmcknsdjnkad",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "zxczxczxcxzc": {
+      "competitorId": "lknadsknasdkzcx",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "caacsacsacs": {
+      "competitorId": "lknadsknasdkzcx",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "svdsvddvsdsv": {
+      "competitorId": "lknadsknasdkzcx",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "qwdqwqwdqwd": {
+      "competitorId": "lknadsknasdkzcx",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "zxzxzxadas": {
+      "competitorId": "kcxzjknckjnasd",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "asasasasas": {
+      "competitorId": "kcxzjknckjnasd",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "qwqwqwqwqw": {
+      "competitorId": "kcxzjknckjnasd",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "wewewewewe": {
+      "competitorId": "kcxzjknckjnasd",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "accsasc": {
+      "competitorId": "klasdmk",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "ascascascasc": {
+      "competitorId": "klasdmk",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "asdasdasdasadsadss": {
+      "competitorId": "klasdmk",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "qwdqwdwqdwdqqwd": {
+      "competitorId": "klasdmk",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "zxczxczxczcx": {
+      "competitorId": "jknasdjkn",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "klassaklsadmklsad": {
+      "competitorId": "jknasdjkn",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "kcczklmzxcmklxzc": {
+      "competitorId": "jknasdjkn",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "kmadsmklaskmlsad": {
+      "competitorId": "jknasdjkn",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "mcmklsacmklasc": {
+      "competitorId": "ijreijsdc",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "asdklakldmklwd": {
+      "competitorId": "ijreijsdc",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "asdklmasdlkmasd": {
+      "competitorId": "ijreijsdc",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "3klm23lkmqwklm": {
+      "competitorId": "ijreijsdc",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "asasdadads": {
+      "competitorId": "jknsdjnwe",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "lmasmksadklmsadmkl": {
+      "competitorId": "jknsdjnwe",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "aslmkdasklmdaslkmd": {
+      "competitorId": "jknsdjnwe",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "asdklqweklm": {
+      "competitorId": "jknsdjnwe",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "klmacsmklsacmlk": {
+      "competitorId": "cxjkncxzkjndsa",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "jnsdjnsdjknds": {
+      "competitorId": "cxjkncxzkjndsa",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "sdcscklm": {
+      "competitorId": "cxjkncxzkjndsa",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "aslkmaslkm": {
+      "competitorId": "cxjkncxzkjndsa",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "klmcklmzxckmlzxc": {
+      "competitorId": "knczjnkxzcjkn",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "zxczxcmnzmxcn": {
+      "competitorId": "knczjnkxzcjkn",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "klasjdlkajsd": {
+      "competitorId": "knczjnkxzcjkn",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "asdnjqwiqwja": {
+      "competitorId": "knczjnkxzcjkn",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    },
+    "aklsklmasd": {
+      "competitorId": "iqwijwijasd",
+      "workoutId": "knjakjnsdajnk",
+      "score": 0
+    },
+    "askldmalksmdasd": {
+      "competitorId": "iqwijwijasd",
+      "workoutId": "knjadsjknadsjkn",
+      "score": 0
+    },
+    "qwmklqwlkemqwd": {
+      "competitorId": "iqwijwijasd",
+      "workoutId": "cjxznxcnzcxnjkxjknz",
+      "score": 0
+    },
+    "qwqweqlkdlkqmw": {
+      "competitorId": "iqwijwijasd",
+      "workoutId": "zcjknczkjnadjknads",
+      "score": 0
+    }
+  }
+}
