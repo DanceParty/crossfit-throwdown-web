@@ -1,6 +1,6 @@
 {
   "competitors": {
-    "Male": {
+    "male": {
       "jdas231": {
         "firstName": "Keevan",
         "lastName": "Dance",
@@ -44,7 +44,7 @@
         "division": "Scaled"
       }
     },
-    "Female": {
+    "female": {
       "klasdmk": {
         "firstName": "Julie",
         "lastName": "Dance",

@@ -1,20 +1,18 @@
 import React from 'react'
-import {
-  fetchCompetitor,
-  fetchScores,
-  fetchWorkouts,
-} from '../utils/dataHelpers'
+import {fetchCompetitor, fetchScores, fetchWorkouts} from '../utils/dataHelpers'
+import {getWorkoutNamesForScores} from '../utils/helpers'
 import Page from '../components/Page'
 import ErrorBoundary from '../components/ErrorBoundary'
 
 class CompetitorDetail extends React.Component {
   state = {
-    firstName: null,
-    lastName: null,
-    division: null,
-    affiliate: null,
-    scores: null,
-    workouts: null,
+    firstName: '',
+    lastName: '',
+    division: '',
+    affiliate: '',
+    scores: [],
+    isLoading: false,
+    error: null,
   }
 
   componentDidMount() {
@@ -22,67 +20,59 @@ class CompetitorDetail extends React.Component {
   }
 
   fetchData = async () => {
-    const { firstName, lastName, division, affiliate } = await fetchCompetitor(
-      this.props.gender,
-      this.props.competitorId
-    )
-    const scores = await fetchScores(this.props.competitorId)
-    const workouts = await fetchWorkouts()
-    this.setState({
-      firstName,
-      lastName,
-      division,
-      affiliate,
-      scores,
-      workouts,
-    })
-  }
+    const {gender, competitorId} = this.props
+    this.setState({isLoading: true})
 
-  matchScoreWithWorkout = (scores, workouts) => {
-    const scoresWithWorkoutNames = scores.map(score => {
-      const result = workouts.find(workout => {
-        return workout.id === score.workoutId
-      })
-      return result ? { ...score, workoutName: result.name } : { ...score }
-    })
-    return scoresWithWorkoutNames.sort((a, b) => {
-      const getNumberFromString = /\d+/g
-      const aNum = a.workoutName.match(getNumberFromString)
-      const bNum = b.workoutName.match(getNumberFromString)
-      if (aNum < bNum) {
-        return -1
-      } else if (aNum > bNum) {
-        return 1
-      } else {
-        return 0
-      }
+    const {
+      error: competitorError,
+      data: {competitor},
+    } = await fetchCompetitor(gender, competitorId)
+
+    const {
+      error: scoresError,
+      data: {scores},
+    } = await fetchScores(competitorId)
+
+    const {
+      error: workoutsError,
+      data: {workouts},
+    } = await fetchWorkouts()
+
+    const collectedErrors =
+      competitorError || scoresError || workoutsError
+        ? {errors: {competitorError, scoresError, workoutsError}}
+        : null
+
+    this.setState({
+      firstName: competitor.firstName,
+      lastName: competitor.lastName,
+      division: competitor.division,
+      affiliate: competitor.affiliate,
+      scores: getWorkoutNamesForScores(scores, workouts),
+      isLoading: false,
+      error: collectedErrors,
     })
   }
 
   render() {
-    const {
-      firstName,
-      lastName,
-      division,
-      affiliate,
-      scores,
-      workouts,
-    } = this.state
-    return scores &&
-      workouts &&
-      firstName &&
-      lastName &&
-      division &&
-      affiliate ? (
-      <Page header={`${firstName} ${lastName}`} link="/competitors">
+    const {scores, isLoading, error, ...competitor} = this.state
+    return isLoading ? (
+      <h1>Loading...</h1>
+    ) : error ? (
+      <h1>Error fetching data</h1>
+    ) : (
+      <Page
+        header={`${competitor.firstName} ${competitor.lastName}`}
+        link="/competitors"
+      >
         <div className="columns">
           <div className="column">
             <h1 className="subtitle">Affiliate:</h1>
-            <h1 className="title">{affiliate}</h1>
+            <h1 className="title">{competitor.affiliate}</h1>
           </div>
           <div className="column">
             <h1 className="subtitle">Division:</h1>
-            <h1 className="title">{division}</h1>
+            <h1 className="title">{competitor.division}</h1>
           </div>
         </div>
         <div className="columns">
@@ -97,7 +87,7 @@ class CompetitorDetail extends React.Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.matchScoreWithWorkout(scores, workouts).map(score => (
+                  {scores.map(score => (
                     <tr key={score.id}>
                       <td>{score.workoutName}</td>
                       <td>{score.score}</td>
@@ -109,8 +99,6 @@ class CompetitorDetail extends React.Component {
           </div>
         </div>
       </Page>
-    ) : (
-      <h1>Loading...</h1>
     )
   }
 }

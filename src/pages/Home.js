@@ -1,6 +1,6 @@
 import React from 'react'
 import Page from '../components/Page'
-import { TileGroup, TileRow, Tile } from '../components/Tile'
+import {TileGroup, TileRow, Tile} from '../components/Tile'
 
 const Home = () => (
   <Page header="Throwdown" link="/">

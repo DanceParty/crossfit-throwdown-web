@@ -18,11 +18,11 @@ import ButtonLink from '../components/ButtonLink'
 class WorkoutDetail extends React.Component {
   state = {
     workout: null,
-    rxMen: null,
-    rxWomen: null,
-    scaledMen: null,
-    scaledWomen: null,
-    scores: null,
+    rxMen: [],
+    rxWomen: [],
+    scaledMen: [],
+    scaledWomen: [],
+    scores: [],
     rxMenEdit: false,
     scaledMenEdit: false,
     rxWomenEdit: false,
@@ -39,18 +39,31 @@ class WorkoutDetail extends React.Component {
     const scores = await fetchScores(id)
     const men = await fetchCompetitors('Male')
     const women = await fetchCompetitors('Female')
-
     const menDivisions = splitByDivision(men)
     const womenDivisions = splitByDivision(women)
-
-    this.setState({
-      workout,
-      scores,
-      rxMen: menDivisions.rx,
-      scaledMen: menDivisions.scaled,
-      rxWomen: womenDivisions.rx,
-      scaledWomen: womenDivisions.scaled,
-    })
+    const rx = workout.rx.map((step, i) => ({
+      key: i,
+      step,
+    }))
+    const scaled = workout.scaled.map((step, i) => ({
+      key: i,
+      step,
+    }))
+    workout.rx = rx
+    workout.scaled = scaled
+    this.setState(
+      {
+        workout,
+        scores,
+        rxMen: menDivisions.rx,
+        scaledMen: menDivisions.scaled,
+        rxWomen: womenDivisions.rx,
+        scaledWomen: womenDivisions.scaled,
+      },
+      () => {
+        console.log(this.state)
+      }
+    )
   }
 
   onSubmit = () => {
@@ -113,28 +126,19 @@ class WorkoutDetail extends React.Component {
       rxWomen,
       scaledWomen,
       scores,
+    } = this.state
+    const {
       rxMenEdit,
       scaledMenEdit,
       rxWomenEdit,
       scaledWomenEdit,
     } = this.state
-    console.log(rxMen)
-    const hasLoaded =
-      workout && rxMen && scaledMen && rxWomen && scaledWomen && scores
-
-    if (hasLoaded) {
-      const rx = workout.rx.map((step, i) => ({
-        key: i,
-        step,
-      }))
-      const scaled = workout.scaled.map((step, i) => ({
-        key: i,
-        step,
-      }))
+    if (workout) {
       const sortedRxMen = this.sortCompetitorsByScore(rxMen, scores)
       const sortedScaledMen = this.sortCompetitorsByScore(scaledMen, scores)
       const sortedRxWomen = this.sortCompetitorsByScore(rxWomen, scores)
       const sortedScaledWomen = this.sortCompetitorsByScore(scaledWomen, scores)
+
       return (
         <Page header={workout.name} link="/workouts">
           <div className="columns">
@@ -147,14 +151,14 @@ class WorkoutDetail extends React.Component {
           <div className="columns">
             <div className="column has-text-centered">
               <h1 className="subtitle">RX</h1>
-              {rx.map(({ key, step }) => (
+              {workout.rx.map(({ key, step }) => (
                 <p key={key}>{step}</p>
               ))}
             </div>
 
             <div className="column has-text-centered">
               <h1 className="subtitle">Scaled</h1>
-              {scaled.map(({ key, step }) => (
+              {workout.scaled.map(({ key, step }) => (
                 <p key={key}>{step}</p>
               ))}
             </div>

@@ -1,15 +1,15 @@
 import React from 'react'
-import { Link } from '@reach/router'
+import {Link} from '@reach/router'
 
-const TileGroup = ({ children }) => (
+const TileGroup = ({children}) => (
   <div className="tile is-ancestor">
     <div className="tile is-vertical is-full">{children}</div>
   </div>
 )
 
-const TileRow = ({ children }) => <div className="tile">{children}</div>
+const TileRow = ({children}) => <div className="tile">{children}</div>
 
-const Tile = ({ link, title, subtitle = '', color }) => (
+const Tile = ({link, title, subtitle = '', color}) => (
   <div className="tile is-parent is-vertical">
     <Link to={link}>
       <article
@@ -22,4 +22,4 @@ const Tile = ({ link, title, subtitle = '', color }) => (
   </div>
 )
 
-export { TileRow, TileGroup, Tile }
+export {TileRow, TileGroup, Tile}

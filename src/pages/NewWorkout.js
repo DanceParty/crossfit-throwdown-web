@@ -1,5 +1,5 @@
 import React from 'react'
-import { postWorkout } from '../utils/dataHelpers'
+import {postWorkout} from '../utils/dataHelpers'
 import Page from '../components/Page'
 import Input from '../components/Input'
 import Select from '../components/Select'
@@ -29,57 +29,23 @@ class NewWorkout extends React.Component {
   }
 
   onChange = event => {
-    const { name, value } = event.target
-    this.setState({ [name]: value })
+    const {name, value} = event.target
+    this.setState({[name]: value})
   }
 
   onSubmit = () => {
+    const {name, type, standards, rx, scaled} = this.state
     const completeForm = this.checkRequiredFields()
     if (completeForm) {
-      const workout = {
-        name: this.state.name,
-        type: this.state.type,
-        standards: this.state.standards,
-        rx: this.state.rx,
-        scaled: this.state.scaled,
-      }
+      const workout = {name, type, standards, rx, scaled}
       workout.rx = removeEmptyArrayItems(workout.rx)
       workout.scaled = removeEmptyArrayItems(workout.scaled)
       postWorkout(workout)
       this.resetState()
-      this.openSuccessCloseError()
+      this.handleOpenSuccess()
     } else {
-      this.openErrorCloseSuccess()
+      this.handleOpenError()
     }
-  }
-
-  addStep = (event, i) => {
-    const { value, name } = event.target
-    const steps = Array.from(this.state[name])
-    steps[i] = value
-    this.setState({ [name]: steps })
-  }
-
-  openSuccessCloseError = () => {
-    this.setState({
-      isSuccessMessageOpen: true,
-      isErrorMessageOpen: false,
-    })
-  }
-
-  openErrorCloseSuccess = () => {
-    this.setState({
-      isSuccessMessageOpen: false,
-      isErrorMessageOpen: true,
-    })
-  }
-
-  checkRequiredFields = () => {
-    const { name, type, standards, rx, scaled } = this.state
-    if (name && type && standards && rx.length > 0 && scaled.length > 0) {
-      return true
-    }
-    return false
   }
 
   onClose = () => {
@@ -89,20 +55,41 @@ class NewWorkout extends React.Component {
     })
   }
 
+  handleOpenSuccess = () => {
+    this.setState({
+      isSuccessMessageOpen: true,
+      isErrorMessageOpen: false,
+    })
+  }
+
+  handleOpenError = () => {
+    this.setState({
+      isSuccessMessageOpen: false,
+      isErrorMessageOpen: true,
+    })
+  }
+
+  handleNewStep = (event, i) => {
+    const {value, name} = event.target
+    const steps = Array.from(this.state[name])
+    steps[i] = value
+    this.setState({[name]: steps})
+  }
+
+  checkRequiredFields = () => {
+    const {name, type, standards, rx, scaled} = this.state
+    if (name && type && standards && rx.length > 0 && scaled.length > 0) {
+      return true
+    }
+    return false
+  }
+
   resetState = () => {
     this.setState(this.defaultState)
   }
 
   render() {
-    const {
-      name,
-      type,
-      standards,
-      rx,
-      scaled,
-      isSuccessMessageOpen,
-      isErrorMessageOpen,
-    } = this.state
+    const {isSuccessMessageOpen, isErrorMessageOpen, ...workout} = this.state
     return (
       <Page header="Add Workout" link="/">
         <div className="columns">
@@ -110,14 +97,14 @@ class NewWorkout extends React.Component {
           <div className="column">
             <Input
               label="Name*"
-              value={name}
+              value={workout.name}
               onChange={this.onChange}
               name="name"
             />
             <Select
               label="Type*"
               name="type"
-              value={type}
+              value={workout.type}
               options={['Timed', 'Weight', 'Point']}
               onChange={this.onChange}
             />
@@ -130,7 +117,7 @@ class NewWorkout extends React.Component {
           <div className="column">
             <Textarea
               label="Standards*"
-              value={standards}
+              value={workout.standards}
               name="standards"
               onChange={this.onChange}
             />
@@ -142,16 +129,16 @@ class NewWorkout extends React.Component {
             <Input
               name="rx"
               label="RX*"
-              value={rx[0] || ''}
-              onChange={e => this.addStep(e, 0)}
+              value={workout.rx[0] || ''}
+              onChange={e => this.handleNewStep(e, 0)}
               testId={`rx-0`}
             />
-            {rx.map((step, i) => (
+            {workout.rx.map((step, i) => (
               <Input
-                key={rx[i]}
+                key={workout.rx[i]}
                 name="rx"
-                value={rx[i + 1] || ''}
-                onChange={e => this.addStep(e, i + 1)}
+                value={workout.rx[i + 1] || ''}
+                onChange={e => this.handleNewStep(e, i + 1)}
                 testId={`rx-${i + 1}`}
               />
             ))}
@@ -160,16 +147,16 @@ class NewWorkout extends React.Component {
             <Input
               name="scaled"
               label="Scaled*"
-              value={scaled[0] || ''}
-              onChange={e => this.addStep(e, 0)}
+              value={workout.scaled[0] || ''}
+              onChange={e => this.handleNewStep(e, 0)}
               testId={`scaled-0`}
             />
-            {scaled.map((step, i) => (
+            {workout.scaled.map((step, i) => (
               <Input
-                key={scaled[i]}
+                key={workout.scaled[i]}
                 name="scaled"
-                value={scaled[i + 1] || ''}
-                onChange={e => this.addStep(e, i + 1)}
+                value={workout.scaled[i + 1] || ''}
+                onChange={e => this.handleNewStep(e, i + 1)}
                 testId={`scaled-${i + 1}`}
               />
             ))}

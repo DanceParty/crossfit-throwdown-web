@@ -4,8 +4,8 @@ import {
   fetchCompetitors,
   fetchWorkouts,
 } from '../utils/dataHelpers'
-import { splitByDivision } from '../utils/helpers'
-import { calculateTotalScore } from '../utils/scoring'
+import {splitByDivision} from '../utils/helpers'
+import {calculateTotalScore} from '../utils/scoring'
 import Page from '../components/Page'
 import ErrorBoundary from '../components/ErrorBoundary'
 
@@ -63,7 +63,7 @@ class Leaderboard extends React.Component {
             <div className="column has-text-centered">
               <h1 className="title">RX Men</h1>
               <ErrorBoundary>
-                <table className="table" style={{ width: '100%' }}>
+                <table className="table" style={{width: '100%'}}>
                   <thead>
                     <tr>
                       <th>Rank</th>
@@ -88,7 +88,7 @@ class Leaderboard extends React.Component {
             <div className="column has-text-centered">
               <h1 className="title">RX Women</h1>
               <ErrorBoundary>
-                <table className="table" style={{ width: '100%' }}>
+                <table className="table" style={{width: '100%'}}>
                   <thead>
                     <tr>
                       <th>Rank</th>
@@ -113,7 +113,7 @@ class Leaderboard extends React.Component {
             <div className="column has-text-centered">
               <h1 className="title">Scaled Men</h1>
               <ErrorBoundary>
-                <table className="table" style={{ width: '100%' }}>
+                <table className="table" style={{width: '100%'}}>
                   <thead>
                     <tr>
                       <th>Rank</th>
@@ -138,7 +138,7 @@ class Leaderboard extends React.Component {
             <div className="column has-text-centered">
               <h1 className="title">Scaled Women</h1>
               <ErrorBoundary>
-                <table className="table" style={{ width: '100%' }}>
+                <table className="table" style={{width: '100%'}}>
                   <thead>
                     <tr>
                       <th>Rank</th>

@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from '@reach/router'
+import {Link} from '@reach/router'
 import Header from './Header'
 
-const Page = ({ header, link, children }) => (
+const Page = ({header, link, children}) => (
   <div className="container">
     <Header>
       {header === 'Throwdown' ? (

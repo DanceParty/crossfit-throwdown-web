@@ -1,17 +1,15 @@
 import React from 'react'
 
-const Select = ({ label, value, options, onChange, name }) => (
+const Select = ({label, options, ...props}) => (
   <div className="field">
-    <label id={name} className="label">
+    <label id={props.name} className="label">
       {label}
-      <div className="select is-medium" style={{ width: '100%' }}>
+      <div className="select is-medium" style={{width: '100%'}}>
         <select
-          aria-labelledby={name}
-          name={name}
-          value={value}
-          onChange={onChange}
-          style={{ width: '100%' }}
-          data-testid={`${name}-select`}
+          aria-labelledby={props.name}
+          {...props}
+          style={{width: '100%'}}
+          data-testid={`${props.name}-select`}
         >
           <option value="" />
           {options.map(option => (

@@ -1,13 +1,80 @@
-import { database } from './firebase'
-import { normalizeDataIntoArray, sort } from './helpers'
+import {database} from './firebase'
+import {normalizeDataIntoArray, sortObjectsByKey} from './helpers'
+
+export const fetchCompetitors = async () => {
+  const response = {
+    data: null,
+    error: null,
+  }
+  try {
+    const menObj = await database.ref(`competitors/men`).once('value')
+    const womenObj = await database.ref(`competitors/women`).once('value')
+
+    const men = normalizeDataIntoArray(menObj.val())
+    const women = normalizeDataIntoArray(womenObj.val())
+    response.data = {
+      men: men.sort((a, b) => sortObjectsByKey(a, b, 'lastName')),
+      women: men.sort((a, b) => sortObjectsByKey(a, b, 'lastName')),
+    }
+  } catch (e) {
+    response.error = e
+  }
+  return response
+}
+
+export const fetchWorkouts = async () => {
+  const response = {
+    data: null,
+    error: null,
+  }
+  try {
+    const workoutsObj = await database.ref('workouts').once('value')
+    const workouts = normalizeDataIntoArray(workoutsObj.val())
+    response.data = {
+      workouts: workouts.sort((a, b) => sortObjectsByKey(a, b, 'name')),
+    }
+  } catch (e) {
+    response.error = e
+  }
+  return response
+}
+
+export const fetchScores = async competitorId => {
+  const response = {
+    data: null,
+    error: null,
+  }
+  try {
+    const scoresObj = await database
+      .ref('scores')
+      .orderByChild('competitorId')
+      .equalTo(competitorId)
+      .once('value')
+    response.data = {
+      scores: normalizeDataIntoArray(scoresObj),
+    }
+  } catch (e) {
+    response.error = e
+  }
+  return response
+}
 
 export const fetchCompetitor = async (gender, id) => {
-  try {
-    const data = await database.ref(`competitors/${gender}/${id}`).once('value')
-    return data.val() ? data.val() : null
-  } catch (e) {
-    console.log(e)
+  const response = {
+    data: null,
+    error: null,
   }
+  try {
+    const competitorObj = await database
+      .ref(`competitors/${gender}/${id}`)
+      .once('value')
+    response.data = {
+      competitor: competitorObj.val(),
+    }
+  } catch (e) {
+    response.error = e
+  }
+  return response
 }
 
 export const fetchWorkout = async id => {
@@ -19,54 +86,25 @@ export const fetchWorkout = async id => {
   }
 }
 
-export const fetchScores = async (competitorId = null, workoutId = null) => {
-  try {
-    let data
-    if (competitorId) {
-      data = await database
-        .ref('scores')
-        .orderByChild('competitorId')
-        .equalTo(competitorId)
-        .once('value')
-    } else if (workoutId) {
-      data = await database
-        .ref('scores')
-        .orderByChild('workoutId')
-        .equalTo(workoutId)
-        .once('value')
-    } else {
-      data = await database.ref('scores').once('value')
-    }
-    return data.val() ? normalizeDataIntoArray(data.val()) : []
-  } catch (e) {
-    console.log(e)
-  }
-}
+// export const fetchScores = async (competitorId = null, workoutId = null) => {
+//   try {
+//     let data
+//     if (competitorId) {
 
-export const fetchWorkouts = async () => {
-  try {
-    const data = await database.ref('workouts').once('value')
-    return data.val()
-      ? normalizeDataIntoArray(data.val()).sort((a, b) => sort(a, b, 'name'))
-      : []
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-export const fetchCompetitors = async (gender = '') => {
-  try {
-    const data = await database.ref(`competitors/${gender}`).once('value')
-
-    if (data.val()) {
-      const competitors = normalizeDataIntoArray(data.val())
-      return competitors.sort((a, b) => sort(a, b, 'lastName'))
-    }
-  } catch (e) {
-    console.log(e)
-  }
-}
-
+//     } else if (workoutId) {
+//       data = await database
+//         .ref('scores')
+//         .orderByChild('workoutId')
+//         .equalTo(workoutId)
+//         .once('value')
+//     } else {
+//       data = await database.ref('scores').once('value')
+//     }
+//     return data.val() ? normalizeDataIntoArray(data.val()) : []
+//   } catch (e) {
+//     console.log(e)
+//   }
+// }
 export const postCompetitor = async (competitor, gender) => {
   try {
     // create competitor

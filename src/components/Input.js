@@ -1,26 +1,17 @@
 import React from 'react'
 
-const Input = ({
-  label,
-  value,
-  onChange,
-  name,
-  small = false,
-  testId = '',
-}) => {
+const Input = ({label, small = false, testId = '', ...props}) => {
   const className = `input ${!small && 'is-medium'}`
   return (
     <div className="field">
-      <label id={name} className="label">
+      <label id={props.name} className="label">
         {label}
         <div className="control">
           <input
-            aria-labelledby={name}
-            onChange={onChange}
-            value={value}
+            {...props}
+            aria-labelledby={props.name}
             type="text"
             className={className}
-            name={name}
             data-testid={testId}
           />
         </div>

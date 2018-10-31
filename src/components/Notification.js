@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Notification = ({ onClick, children, color }) => (
+const Notification = ({onClick, children, color}) => (
   <div className={`notification ${color}`}>
     <button className="delete" onClick={onClick} />
     {children}

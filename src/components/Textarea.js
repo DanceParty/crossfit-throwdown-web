@@ -1,16 +1,11 @@
 import React from 'react'
 
-const Textarea = ({ name, label, value, onChange }) => (
+const Textarea = ({label, ...props}) => (
   <div className="field">
     <label className="label">
       {label}
       <div className="control">
-        <textarea
-          name={name}
-          value={value}
-          className="textarea"
-          onChange={onChange}
-        />
+        <textarea {...props} className="textarea" />
       </div>
     </label>
   </div>

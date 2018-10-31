@@ -1,9 +1,9 @@
 import React from 'react'
 import { fireEvent, waitForElement } from 'react-testing-library'
 import 'jest-dom/extend-expect'
-import { database } from '../utils/firebase'
-import renderWithRouter from '../utils/testRouter'
-import App from '../App'
+import { database } from '../../utils/firebase'
+import renderWithRouter from '../../utils/testRouter'
+import App from '../../App'
 
 beforeEach(async () => {
   if (database.app.options_.projectId === 'crossfitthrowdown-test') {

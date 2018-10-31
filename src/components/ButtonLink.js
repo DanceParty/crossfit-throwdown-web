@@ -1,9 +1,8 @@
 import React from 'react'
 
-const ButtonLink = ({ children, name, onClick }) => (
+const ButtonLink = ({children, ...props}) => (
   <button
-    name={name}
-    onClick={onClick}
+    {...props}
     style={{
       background: 'none important!',
       color: 'hsl(217, 71%, 53%)',

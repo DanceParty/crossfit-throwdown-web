@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from '@reach/router'
-import { fetchCompetitors } from '../utils/dataHelpers'
+import {Link} from '@reach/router'
+import {fetchCompetitors} from '../utils/dataHelpers'
 import Page from '../components/Page'
 import ErrorBoundary from '../components/ErrorBoundary'
 
@@ -8,6 +8,8 @@ class Competitors extends React.Component {
   state = {
     men: [],
     women: [],
+    isLoading: false,
+    error: null,
   }
 
   componentDidMount() {
@@ -15,20 +17,29 @@ class Competitors extends React.Component {
   }
 
   fetchData = async () => {
-    const men = await fetchCompetitors('Male')
-    const women = await fetchCompetitors('Female')
-    this.setState({ men, women })
+    this.setState({isLoading: true})
+    const {data, error} = fetchCompetitors()
+    this.setState({
+      men: data.men,
+      women: data.women,
+      isLoading: false,
+      error: error,
+    })
   }
 
   render() {
-    const { men, women } = this.state
-    return men && women ? (
+    const {men, women, isLoading, error} = this.state
+    return isLoading ? (
+      <h1>Loading...</h1>
+    ) : error ? (
+      <h1>Error fetching data</h1>
+    ) : (
       <Page header="Competitors" link="/">
         <div className="columns">
           <div className="column has-text-centered">
             <h1 className="subtitle">Men</h1>
             <ErrorBoundary>
-              <table className="table" style={{ width: '100%' }}>
+              <table className="table" style={{width: '100%'}}>
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -58,7 +69,7 @@ class Competitors extends React.Component {
           <div className="column has-text-centered">
             <h1 className="subtitle">Women</h1>
             <ErrorBoundary>
-              <table className="table" style={{ width: '100%' }}>
+              <table className="table" style={{width: '100%'}}>
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -89,8 +100,6 @@ class Competitors extends React.Component {
           </div>
         </div>
       </Page>
-    ) : (
-      <h1 className="title">Loading...</h1>
     )
   }
 }

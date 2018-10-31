@@ -1,5 +1,5 @@
 import React from 'react'
-import { postCompetitor } from '../utils/dataHelpers'
+import {postCompetitor} from '../utils/dataHelpers'
 import Page from '../components/Page'
 import Input from '../components/Input'
 import Button from '../components/Button'
@@ -26,30 +26,19 @@ class NewCompetitor extends React.Component {
   }
 
   onChange = event => {
-    const { name, value } = event.target
-    this.setState({ [name]: value })
+    const {name, value} = event.target
+    this.setState({[name]: value})
   }
 
   onSubmit = async () => {
-    const { firstName, lastName, division } = this.state
-    const {
-      gender,
-      isSuccessMessageOpen,
-      isErrorMessageOpen,
-      ...competitor
-    } = this.state
+    const {firstName, lastName, division, gender, affiliate} = this.state
     if (firstName && lastName && division && gender) {
+      const competitor = {firstName, lastName, division, affiliate}
       await postCompetitor(competitor, gender)
       this.resetState()
-      this.setState({
-        isSuccessMessageOpen: true,
-        isErrorMessageOpen: false,
-      })
+      this.handleOpenSuccess()
     } else {
-      this.setState({
-        isSuccessMessageOpen: false,
-        isErrorMessageOpen: true,
-      })
+      this.handleOpenError()
     }
   }
 
@@ -57,6 +46,20 @@ class NewCompetitor extends React.Component {
     this.setState({
       isSuccessMessageOpen: false,
       isErrorMessageOpen: false,
+    })
+  }
+
+  handleOpenSuccess = () => {
+    this.setState({
+      isSuccessMessageOpen: true,
+      isErrorMessageOpen: false,
+    })
+  }
+
+  handleOpenError = () => {
+    this.setState({
+      isSuccessMessageOpen: false,
+      isErrorMessageOpen: true,
     })
   }
 
