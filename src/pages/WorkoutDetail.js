@@ -1,15 +1,11 @@
 import React from 'react'
-import { database } from '../utils/firebase'
+import {database} from '../utils/firebase'
 import {
   sortNormalWorkout,
   sortTimedWorkout,
   splitByDivision,
 } from '../utils/helpers'
-import {
-  fetchWorkout,
-  fetchCompetitors,
-  fetchScores,
-} from '../utils/dataHelpers'
+import {fetchWorkout, fetchCompetitors, fetchScores} from '../utils/dataHelpers'
 import Page from '../components/Page'
 import Input from '../components/Input'
 import Button from '../components/Button'
@@ -17,24 +13,24 @@ import ButtonLink from '../components/ButtonLink'
 
 class WorkoutDetail extends React.Component {
   state = {
-    workout: null,
-    rxMen: [],
-    rxWomen: [],
-    scaledMen: [],
-    scaledWomen: [],
+    workout: {},
+    competitors: {},
     scores: [],
     rxMenEdit: false,
     scaledMenEdit: false,
     rxWomenEdit: false,
     scaledWomenEdit: false,
+    isLoading: true,
+    error: null,
   }
 
   componentDidMount() {
-    const { workoutId } = this.props
-    this.fetchData(workoutId)
+    this.fetchData()
   }
 
-  fetchData = async id => {
+  fetchData = async () => {
+    const {workoutId} = this.props
+    this.setState({isLoading: true})
     const workout = await fetchWorkout(id)
     const scores = await fetchScores(id)
     const men = await fetchCompetitors('Male')
@@ -62,15 +58,15 @@ class WorkoutDetail extends React.Component {
       },
       () => {
         console.log(this.state)
-      }
+      },
     )
   }
 
   onSubmit = () => {
-    const { scores } = this.state
+    const {scores} = this.state
     let updates = {}
     scores.forEach(scoreObj => {
-      const { competitorId, workoutId, score } = scoreObj
+      const {competitorId, workoutId, score} = scoreObj
       updates[`scores/${scoreObj.id}`] = {
         competitorId,
         workoutId,
@@ -87,28 +83,28 @@ class WorkoutDetail extends React.Component {
   }
 
   onToggleEdit = event => {
-    const { name } = event.target
+    const {name} = event.target
     this.setState(prevState => ({
       [name]: !prevState[name],
     }))
   }
 
   onChangeScore = event => {
-    const { name, value } = event.target
-    const { scores } = this.state
+    const {name, value} = event.target
+    const {scores} = this.state
     const updatedScores = scores.map(scoreObj => {
       if (scoreObj.id === name) {
-        return { ...scoreObj, score: value }
+        return {...scoreObj, score: value}
       } else {
         return scoreObj
       }
     })
 
-    this.setState({ scores: updatedScores })
+    this.setState({scores: updatedScores})
   }
 
   sortCompetitorsByScore = (competitors, scores) => {
-    const { workout } = this.state
+    const {workout} = this.state
     let response = {}
     if (workout.type === 'Timed') {
       response = sortTimedWorkout(competitors, scores)
@@ -119,20 +115,8 @@ class WorkoutDetail extends React.Component {
   }
 
   render() {
-    const {
-      workout,
-      rxMen,
-      scaledMen,
-      rxWomen,
-      scaledWomen,
-      scores,
-    } = this.state
-    const {
-      rxMenEdit,
-      scaledMenEdit,
-      rxWomenEdit,
-      scaledWomenEdit,
-    } = this.state
+    const {workout, rxMen, scaledMen, rxWomen, scaledWomen, scores} = this.state
+    const {rxMenEdit, scaledMenEdit, rxWomenEdit, scaledWomenEdit} = this.state
     if (workout) {
       const sortedRxMen = this.sortCompetitorsByScore(rxMen, scores)
       const sortedScaledMen = this.sortCompetitorsByScore(scaledMen, scores)
@@ -151,14 +135,14 @@ class WorkoutDetail extends React.Component {
           <div className="columns">
             <div className="column has-text-centered">
               <h1 className="subtitle">RX</h1>
-              {workout.rx.map(({ key, step }) => (
+              {workout.rx.map(({key, step}) => (
                 <p key={key}>{step}</p>
               ))}
             </div>
 
             <div className="column has-text-centered">
               <h1 className="subtitle">Scaled</h1>
-              {workout.scaled.map(({ key, step }) => (
+              {workout.scaled.map(({key, step}) => (
                 <p key={key}>{step}</p>
               ))}
             </div>
@@ -170,7 +154,7 @@ class WorkoutDetail extends React.Component {
               <ButtonLink name="rxMenEdit" onClick={this.onToggleEdit}>
                 {rxMenEdit ? 'close edit mode' : 'edit scores'}
               </ButtonLink>
-              <table className="table" style={{ width: '100%' }}>
+              <table className="table" style={{width: '100%'}}>
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -180,7 +164,7 @@ class WorkoutDetail extends React.Component {
                 <tbody>
                   {sortedRxMen.map((man, i) => (
                     <tr key={man.id}>
-                      <td style={{ width: '55%' }}>
+                      <td style={{width: '55%'}}>
                         <b>{i + 1}</b>
                         {` ${man.firstName} ${man.lastName}`}
                       </td>
@@ -215,7 +199,7 @@ class WorkoutDetail extends React.Component {
               <ButtonLink name="scaledMenEdit" onClick={this.onToggleEdit}>
                 {scaledMenEdit ? 'close edit mode' : 'edit scores'}
               </ButtonLink>
-              <table className="table" style={{ width: '100%' }}>
+              <table className="table" style={{width: '100%'}}>
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -225,7 +209,7 @@ class WorkoutDetail extends React.Component {
                 <tbody>
                   {sortedScaledMen.map((man, i) => (
                     <tr key={man.id}>
-                      <td style={{ width: '55%' }}>
+                      <td style={{width: '55%'}}>
                         <b>{i + 1}</b>
                         {` ${man.firstName} ${man.lastName}`}
                       </td>
@@ -260,7 +244,7 @@ class WorkoutDetail extends React.Component {
               <ButtonLink name="rxWomenEdit" onClick={this.onToggleEdit}>
                 {rxWomenEdit ? 'close edit mode' : 'edit scores'}
               </ButtonLink>
-              <table className="table" style={{ width: '100%' }}>
+              <table className="table" style={{width: '100%'}}>
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -270,7 +254,7 @@ class WorkoutDetail extends React.Component {
                 <tbody>
                   {sortedRxWomen.map((woman, i) => (
                     <tr key={woman.id}>
-                      <td style={{ width: '55%' }}>
+                      <td style={{width: '55%'}}>
                         <b>{i + 1}</b>
                         {` ${woman.firstName} ${woman.lastName}`}
                       </td>
@@ -305,7 +289,7 @@ class WorkoutDetail extends React.Component {
               <ButtonLink name="scaledWomenEdit" onClick={this.onToggleEdit}>
                 {scaledWomenEdit ? 'close edit mode' : 'edit scores'}
               </ButtonLink>
-              <table className="table" style={{ width: '100%' }}>
+              <table className="table" style={{width: '100%'}}>
                 <thead>
                   <tr>
                     <th>Name</th>
@@ -315,7 +299,7 @@ class WorkoutDetail extends React.Component {
                 <tbody>
                   {sortedScaledWomen.map((woman, i) => (
                     <tr key={woman.id}>
-                      <td style={{ width: '55%' }}>
+                      <td style={{width: '55%'}}>
                         <b>{i + 1}</b>
                         {` ${woman.firstName} ${woman.lastName}`}
                       </td>
