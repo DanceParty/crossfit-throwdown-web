@@ -22,7 +22,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "set CI=true npm test"
+      "pre-commit": "npm test -- --coverage "
     }
   },
   "browserslist": [
