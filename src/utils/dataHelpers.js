@@ -1,4 +1,4 @@
-import {database} from './firebase'
+import {firebase, database} from './firebase'
 import {normalizeDataIntoArray, sortObjectsByKey, splitByDivision} from './helpers'
 
 export const fetchCompetitors = async () => {
@@ -175,4 +175,23 @@ export const postScores = scores => {
   } catch (e) {
     console.log(e)
   }
+}
+
+export const login = async (email, password) => {
+  const response = {
+    data: null,
+    error: null,
+  }
+  try {
+    await firebase.auth().signInWithEmailAndPassword(email, password)
+    const user = firebase.auth().currentUser
+    response.data = user
+  } catch (e) {
+    response.error = e.message
+  }
+  return response
+}
+
+export const checkCurrentUser = () => {
+  return firebase.auth().currentUser
 }

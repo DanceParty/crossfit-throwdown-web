@@ -7,6 +7,8 @@ const Page = ({header, link, children}) => (
     <Header>
       {header === 'CrossFit Yuma Throwdown' ? (
         <Link to={`${link}`}>{header}</Link>
+      ) : header === 'Login' ? (
+        <span>{header}</span>
       ) : (
         <Link to={`${link}`}>{`< ${header}`}</Link>
       )}

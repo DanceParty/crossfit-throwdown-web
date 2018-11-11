@@ -40,3 +40,12 @@ export const fetchWorkout = jest.fn(workoutId => {
     error: null,
   }
 })
+export const login = jest.fn((email, password) => {
+  if (email === 'test@test.com' && password === 'test') {
+    return {data: {email: 'test@test.com'}, error: null}
+  }
+  return {data: null, error: 'invalid email and password'}
+})
+export const checkCurrentUser = jest.fn(() => {
+  return true
+})

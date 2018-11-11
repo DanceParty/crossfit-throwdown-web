@@ -15,7 +15,7 @@ const StyledButton = styled.div`
   }
 `
 
-const Button = ({width, color, children, onClick, small}) => {
+const Button = ({color, children, onClick, small}) => {
   const size = small ? 'is-small' : 'is-medium'
   const className = `button is-${color} ${size}`
   return (
