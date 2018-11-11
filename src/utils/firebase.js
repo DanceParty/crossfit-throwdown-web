@@ -1,16 +1,8 @@
 import firebase from 'firebase/app'
 import 'firebase/database'
-import { development, test } from './keys'
+import {development} from './keys'
 
-let firebaseConfig
-
-if (process.env.NODE_ENV === 'development') {
-  firebaseConfig = { ...development }
-} else if (process.env.NODE_ENV === 'test') {
-  firebaseConfig = { ...test }
-}
-
-firebase.initializeApp(firebaseConfig)
+firebase.initializeApp(development)
 const database = firebase.database()
 
-export { firebaseConfig, database }
+export {firebase, database}

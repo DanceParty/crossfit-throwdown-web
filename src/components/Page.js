@@ -5,7 +5,7 @@ import Header from './Header'
 const Page = ({header, link, children}) => (
   <div className="container">
     <Header>
-      {header === 'Throwdown' ? (
+      {header === 'CrossFit Yuma Throwdown' ? (
         <Link to={`${link}`}>{header}</Link>
       ) : (
         <Link to={`${link}`}>{`< ${header}`}</Link>

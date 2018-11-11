@@ -34,9 +34,10 @@ class NewCompetitor extends React.Component {
     const {firstName, lastName, division, gender, affiliate} = this.state
     if (firstName && lastName && division && gender) {
       const competitor = {firstName, lastName, division, affiliate}
-      await postCompetitor(competitor, gender)
-      this.resetState()
+      const genderArg = gender === 'Male' ? 'men' : 'women'
+      await postCompetitor(competitor, genderArg)
       this.handleOpenSuccess()
+      this.resetState()
     } else {
       this.handleOpenError()
     }
@@ -80,8 +81,7 @@ class NewCompetitor extends React.Component {
     return (
       <Page header="Add Competitor" link="/">
         <div className="columns">
-          <div className="column" />
-          <div className="column">
+          <div className="column is-one-third is-offset-one-third">
             <div className="columns">
               <div className="column">
                 <Input
@@ -101,11 +101,9 @@ class NewCompetitor extends React.Component {
               </div>
             </div>
           </div>
-          <div className="column" />
         </div>
         <div className="columns">
-          <div className="column" />
-          <div className="column">
+          <div className="column is-one-third is-offset-one-third">
             <div className="columns">
               <div className="column has-text-left">
                 <Select
@@ -127,31 +125,20 @@ class NewCompetitor extends React.Component {
               </div>
             </div>
           </div>
-          <div className="column" />
         </div>
 
         <div className="columns">
-          <div className="column" />
-          <div className="column">
-            <Input
-              label="Affiliate"
-              value={affiliate}
-              onChange={this.onChange}
-              name="affiliate"
-            />
+          <div className="column is-one-third is-offset-one-third">
+            <Input label="Affiliate" value={affiliate} onChange={this.onChange} name="affiliate" />
           </div>
           <div className="column" />
         </div>
         <div className="columns">
-          <div className="column" />
-          <div className="column">
-            <div className="column">
-              <Button width="100%" color="success" onClick={this.onSubmit}>
-                Submit
-              </Button>
-            </div>
+          <div className="column is-one-third is-offset-one-third has-text-centered">
+            <Button width="100%" color="success" onClick={this.onSubmit}>
+              Submit
+            </Button>
           </div>
-          <div className="column" />
         </div>
         {isSuccessMessageOpen && (
           <Notification color="is-success" onClick={this.onClose}>

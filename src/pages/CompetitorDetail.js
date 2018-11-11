@@ -11,7 +11,7 @@ class CompetitorDetail extends React.Component {
     division: '',
     affiliate: '',
     scores: [],
-    isLoading: false,
+    isLoading: true,
     error: null,
   }
 
@@ -22,25 +22,13 @@ class CompetitorDetail extends React.Component {
   fetchData = async () => {
     const {gender, competitorId} = this.props
     this.setState({isLoading: true})
-
-    const {
-      error: competitorError,
-      data: {competitor},
-    } = await fetchCompetitor(gender, competitorId)
-
-    const {
-      error: scoresError,
-      data: {scores},
-    } = await fetchScores(competitorId)
-
-    const {
-      error: workoutsError,
-      data: {workouts},
-    } = await fetchWorkouts()
+    const {error: competitorErr, data: competitor} = await fetchCompetitor(gender, competitorId)
+    const {error: scoresErr, data: scores} = await fetchScores(competitorId)
+    const {error: workoutsErr, data: workouts} = await fetchWorkouts()
 
     const collectedErrors =
-      competitorError || scoresError || workoutsError
-        ? {errors: {competitorError, scoresError, workoutsError}}
+      competitorErr || scoresErr || workoutsErr
+        ? {errors: {competitorErr, scoresErr, workoutsErr}}
         : null
 
     this.setState({
@@ -61,10 +49,7 @@ class CompetitorDetail extends React.Component {
     ) : error ? (
       <h1>Error fetching data</h1>
     ) : (
-      <Page
-        header={`${competitor.firstName} ${competitor.lastName}`}
-        link="/competitors"
-      >
+      <Page header={`${competitor.firstName} ${competitor.lastName}`} link="/competitors">
         <div className="columns">
           <div className="column">
             <h1 className="subtitle">Affiliate:</h1>

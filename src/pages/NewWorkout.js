@@ -93,14 +93,8 @@ class NewWorkout extends React.Component {
     return (
       <Page header="Add Workout" link="/">
         <div className="columns">
-          <div className="column" />
           <div className="column">
-            <Input
-              label="Name*"
-              value={workout.name}
-              onChange={this.onChange}
-              name="name"
-            />
+            <Input label="Name*" value={workout.name} onChange={this.onChange} name="name" />
             <Select
               label="Type*"
               name="type"
@@ -109,11 +103,6 @@ class NewWorkout extends React.Component {
               onChange={this.onChange}
             />
           </div>
-          <div className="column" />
-        </div>
-
-        <div className="columns">
-          <div className="column" />
           <div className="column">
             <Textarea
               label="Standards*"
@@ -122,7 +111,6 @@ class NewWorkout extends React.Component {
               onChange={this.onChange}
             />
           </div>
-          <div className="column" />
         </div>
         <div className="columns">
           <div className="column">
@@ -164,13 +152,11 @@ class NewWorkout extends React.Component {
         </div>
 
         <div className="columns">
-          <div className="column" />
-          <div className="column">
+          <div className="column is-one-third is-offset-one-third has-text-centered">
             <Button width="100%" color="success" onClick={this.onSubmit}>
               Submit
             </Button>
           </div>
-          <div className="column" />
         </div>
         {isSuccessMessageOpen && (
           <Notification color="is-success" onClick={this.onClose}>

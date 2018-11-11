@@ -1,6 +1,6 @@
 {
   "competitors": {
-    "male": {
+    "men": {
       "jdas231": {
         "firstName": "Keevan",
         "lastName": "Dance",
@@ -44,7 +44,7 @@
         "division": "Scaled"
       }
     },
-    "female": {
+    "women": {
       "klasdmk": {
         "firstName": "Julie",
         "lastName": "Dance",
@@ -147,27 +147,27 @@
     "kjnasdjknasd": {
       "competitorId": "jdas231",
       "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "score": 100
     },
     "jknasdjnksda": {
       "competitorId": "jdas231",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 200
     },
     "zxknjxzcn": {
       "competitorId": "jdas231",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 300
     },
     "qweknas": {
       "competitorId": "jdas231",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 140
     },
     "zcxklcxn": {
       "competitorId": "knasdkjn239asd",
       "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "score": 233
     },
     "zxcxzcklmzxc": {
       "competitorId": "knasdkjn239asd",

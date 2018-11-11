@@ -1,91 +1,92 @@
-import {sortTimedWorkout, sortNormalWorkout} from './helpers'
+import {
+  addTotalScoreToCompetitors,
+  addScoresToCompetitors,
+  getScoresByWorkoutId,
+  getScoresForCompetitors,
+  calculateTotalScore,
+  sortCompetitorsListByScore,
+  calculateTie,
+} from './helpers'
 
-const getSortedCompetitorsAndZeroPointCompetitors = (
-  workoutType,
-  scores,
-  competitors,
-) => {
-  let sortedCompetitors
-  if (workoutType === 'Timed') {
-    sortedCompetitors = sortTimedWorkout(competitors, scores)
-  } else {
-    sortedCompetitors = sortNormalWorkout(competitors, scores)
+export function calculateStandings(workouts, scores) {
+  return function(competitors) {
+    // add totalScore attribute to competitors
+    let competitorsWithTotalScore = addTotalScoreToCompetitors(competitors)
+    // // split scores by division
+    const scoresForCompetitors = getScoresForCompetitors(scores, competitorsWithTotalScore)
+    workouts.forEach(workout => {
+      // get scores for workout
+      const scoresForCurrentWorkout = getScoresByWorkoutId(scoresForCompetitors, workout.id)
+      // sort competitors by score
+      const sortedCompetitors = sortCompetitorsListByScore(
+        competitorsWithTotalScore,
+        scoresForCurrentWorkout,
+        workout.type,
+      )
+      // increment total score (this works for both valid and invalid scores)
+      competitorsWithTotalScore = calculateTotalScore(sortedCompetitors)
+    })
+    // calculate overall ties
+    let tieCounter = competitorsWithTotalScore.length
+    const competitorsWithStandings = competitorsWithTotalScore.map((competitor, i, origArr) => {
+      const isTie = calculateTie(competitor, origArr, i, 'totalScore')
+      if (isTie) {
+        return {...competitor, standing: tieCounter}
+      }
+      tieCounter--
+      return {...competitor, standing: i + 1}
+    })
+    return competitorsWithStandings
   }
-  return sortedCompetitors
 }
 
-export const calculateStandings = (
-  workouts,
-  scores,
-  competitorsWithSameDivision,
-) => {
-  // add total score object to competitors
-  // this will hold the sum of index when sorted
-  let competitorsWithTotalScore = competitorsWithSameDivision.map(
-    competitor => ({
-      ...competitor,
-      totalScore: 0,
-    }),
+export function sortCompetitorsByNormalWorkout(competitors, scores) {
+  const [validScores, validCompetitors, invalidCompetitors] = splitScoresByValidity(
+    competitors,
+    scores,
+  )
+  // add scores to competitors
+  const validCompetitorsWithScore = addScoresToCompetitors(validCompetitors, validScores)
+  const sortedCompetitors = validCompetitorsWithScore.sort((a, b) => {
+    return b.score - a.score
+  })
+  return [...sortedCompetitors, ...invalidCompetitors]
+}
+
+export function sortCompetitorsByTimedWorkout(competitors, scores) {
+  const [validScores, validCompetitors, invalidCompetitors] = splitScoresByValidity(
+    competitors,
+    scores,
+  )
+  // sort the competitors that have a score
+  const validCompetitorsWithScore = addScoresToCompetitors(validCompetitors, validScores)
+  const sortedCompetitors = validCompetitorsWithScore.sort((a, b) => {
+    return a.score - b.score
+  })
+  // return each group of competitors
+  return [...sortedCompetitors, ...invalidCompetitors]
+}
+
+function splitScoresByValidity(competitors, scores) {
+  // get scores with that are valid (not zero)
+  const validScores = scores.filter(score =>
+    competitors.some(competitor => competitor.id === score.competitorId && score.score !== 0),
   )
 
-  // filter away scores that are not relevant for this set of competitors
-  // and workouts
-  const scoresForCurrentCompetitors = scores.filter(score => {
-    return competitorsWithSameDivision.some(competitor => {
-      return competitor.id === score.competitorId
-    })
-  })
+  // get all scores that are non-valid (zero)
+  const invalidScores = scores.filter(score =>
+    competitors.some(competitor => competitor.id === score.competitorId && score.score === 0),
+  )
 
-  workouts.forEach(workout => {
-    const scoresForCurrentWorkout = scoresForCurrentCompetitors.filter(
-      score => {
-        return workout.id === score.workoutId
-      },
-    )
+  // match valid scores to competitors
+  const validCompetitors = competitors.filter(competitor =>
+    validScores.some(score => competitor.id === score.competitorId),
+  )
 
-    // get a sorted list of competitors who have a score for the current workout
-    // and a list of competitors who did not participate (0 for score)
-    const {
-      sortedCompetitors,
-      zeroCompetitors,
-    } = getSortedCompetitorsAndZeroPointCompetitors(
-      workout.type,
-      scoresForCurrentWorkout,
-      competitorsWithTotalScore,
-    )
+  // match invalid scores to competitors
+  const invalidCompetitors = competitors.filter(competitor =>
+    invalidScores.some(score => competitor.id === score.competitorId),
+  )
 
-    // figure out total score of participating competitors
-    // by adding the index + 1 to the total score
-    const sortedCompetitorsWithTotalScore = sortedCompetitors.map(
-      (competitor, i) => {
-        const score = i + 1
-        return {
-          ...competitor,
-          totalScore: competitor.totalScore + score,
-        }
-      },
-    )
-
-    // total score for non participating competitors is just last place
-    // aka the length of the sorted array, because if there are 10 competitors
-    // and 2 people didn't participate, they should both be tied for 8th instead
-    // of tied for 10th
-    const zeroPointCompetitorsWithTotalScore = zeroCompetitors.map(
-      competitor => {
-        const score = sortedCompetitors.length
-        return {
-          ...competitor,
-          totalScore: competitor.totalScore + score,
-        }
-      },
-    )
-
-    // spread the arrays with updated total points, so they persist across
-    // all the workout comparisons
-    competitorsWithTotalScore = [
-      ...sortedCompetitorsWithTotalScore,
-      ...zeroPointCompetitorsWithTotalScore,
-    ]
-  })
-  return competitorsWithTotalScore
+  return [validScores, validCompetitors, invalidCompetitors]
 }
