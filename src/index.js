@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {} from 'dotenv/config'
 import 'bulma/css/bulma.css'
 import './utils/firebase'
 import './styles/index.css'
