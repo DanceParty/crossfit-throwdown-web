@@ -18,9 +18,7 @@
     "start": "dotenv react-scripts start",
     "build": "dotenv react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "seed": "firebase database:set / seedData.json",
-    "seed-test": "firebase database:set / seedData.json"
+    "eject": "react-scripts eject"
   },
   "husky": {
     "hooks": {

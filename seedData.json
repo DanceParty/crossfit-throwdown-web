@@ -90,7 +90,7 @@
     }
   },
   "workouts": {
-    "knjakjnsdajnk": {
+    "aaaknjakjnsdajnk": {
       "name": "Wod #1",
       "type": "Timed",
       "standards": "Athletes must complete the required repeititions of each movement before moving on. Each clean will begin from the floor, and the repetition will only count once the athlete is fully standing - knees and hips fully extended, bar resting across the shoulders. For the box jump over, the athlete must go up and over the box. For RX/Masters under 50, athletes must jump, no step ups are allowed. For Scaled, athletes may jump or step up. In either case, BOTH feet must touch the top of the box",
@@ -127,7 +127,7 @@
     },
     "zcjknczkjnadjknads": {
       "name": "Wod #3",
-      "type": "Timed",
+      "type": "Weight",
       "standards": "All wall balls will be a to a 10 ft target. Athletes must squat to full depth, top of nknee below hip crease, and the ball must clearly make contact with the surface of the target. For the chest to bar pull up, the athlete must fully extend the arms in the bottom position, and make clear contact with the bar at the top of the movement. for scaled the jumping pull up/pull up is complete when the chin of the athelete psses the hksjnsdkjnsadl.",
       "rx": [
         "3 Rounds for Time",
@@ -146,7 +146,7 @@
   "scores": {
     "kjnasdjknasd": {
       "competitorId": "jdas231",
-      "workoutId": "knjakjnsdajnk",
+      "workoutId": "aaaknjakjnsdajnk",
       "score": 100
     },
     "jknasdjnksda": {
@@ -166,263 +166,263 @@
     },
     "zcxklcxn": {
       "competitorId": "knasdkjn239asd",
-      "workoutId": "knjakjnsdajnk",
+      "workoutId": "aaaknjakjnsdajnk",
       "score": 233
     },
     "zxcxzcklmzxc": {
       "competitorId": "knasdkjn239asd",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 150
     },
     "lkadskmlasdklm": {
       "competitorId": "knasdkjn239asd",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 200
     },
     "mkcxklmzxc": {
       "competitorId": "knasdkjn239asd",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 500
     },
     "mxzmklxzcklm": {
       "competitorId": "jsfsdoice90dslka",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 10
     },
     "lmczklmzxckl": {
       "competitorId": "jsfsdoice90dslka",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 150
     },
     "klmcklmsdklm": {
       "competitorId": "jsfsdoice90dslka",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 120
     },
     "acklasklmas": {
       "competitorId": "jsfsdoice90dslka",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 222
     },
     "lkmzcxmkxzc": {
       "competitorId": "lkvnjkxcvjnke",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 333
     },
     "kmckmlzxc": {
       "competitorId": "lkvnjkxcvjnke",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 432
     },
     "mlasmklasd": {
       "competitorId": "lkvnjkxcvjnke",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 234
     },
     "cklmzxcklmxcz": {
       "competitorId": "lkvnjkxcvjnke",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 1241
     },
     "zxczxczcx": {
       "competitorId": "lkmcknsdjnkad",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 3222
     },
     "asdasdasd": {
       "competitorId": "lkmcknsdjnkad",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 11
     },
     "wqeqwewqe": {
       "competitorId": "lkmcknsdjnkad",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 100
     },
     "asascasc": {
       "competitorId": "lkmcknsdjnkad",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 134
     },
     "zxczxczxcxzc": {
       "competitorId": "lknadsknasdkzcx",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 432
     },
     "caacsacsacs": {
       "competitorId": "lknadsknasdkzcx",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 232
     },
     "svdsvddvsdsv": {
       "competitorId": "lknadsknasdkzcx",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 232
     },
     "qwdqwqwdqwd": {
       "competitorId": "lknadsknasdkzcx",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 222
     },
     "zxzxzxadas": {
       "competitorId": "kcxzjknckjnasd",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 222
     },
     "asasasasas": {
       "competitorId": "kcxzjknckjnasd",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 149
     },
     "qwqwqwqwqw": {
       "competitorId": "kcxzjknckjnasd",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 149
     },
     "wewewewewe": {
       "competitorId": "kcxzjknckjnasd",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 112
     },
     "accsasc": {
       "competitorId": "klasdmk",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 221
     },
     "ascascascasc": {
       "competitorId": "klasdmk",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 455
     },
     "asdasdasdasadsadss": {
       "competitorId": "klasdmk",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 727
     },
     "qwdqwdwqdwdqqwd": {
       "competitorId": "klasdmk",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 121
     },
     "zxczxczxczcx": {
       "competitorId": "jknasdjkn",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 322
     },
     "klassaklsadmklsad": {
       "competitorId": "jknasdjkn",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 542
     },
     "kcczklmzxcmklxzc": {
       "competitorId": "jknasdjkn",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 684
     },
     "kmadsmklaskmlsad": {
       "competitorId": "jknasdjkn",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 483
     },
     "mcmklsacmklasc": {
       "competitorId": "ijreijsdc",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 191
     },
     "asdklakldmklwd": {
       "competitorId": "ijreijsdc",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 1922
     },
     "asdklmasdlkmasd": {
       "competitorId": "ijreijsdc",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 393
     },
     "3klm23lkmqwklm": {
       "competitorId": "ijreijsdc",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 20
     },
     "asasdadads": {
       "competitorId": "jknsdjnwe",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 403
     },
     "lmasmksadklmsadmkl": {
       "competitorId": "jknsdjnwe",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 403
     },
     "aslmkdasklmdaslkmd": {
       "competitorId": "jknsdjnwe",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 303
     },
     "asdklqweklm": {
       "competitorId": "jknsdjnwe",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 203
     },
     "klmacsmklsacmlk": {
       "competitorId": "cxjkncxzkjndsa",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 4894
     },
     "jnsdjnsdjknds": {
       "competitorId": "cxjkncxzkjndsa",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 121
     },
     "sdcscklm": {
       "competitorId": "cxjkncxzkjndsa",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 111
     },
     "aslkmaslkm": {
       "competitorId": "cxjkncxzkjndsa",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 121
     },
     "klmcklmzxckmlzxc": {
       "competitorId": "knczjnkxzcjkn",
-      "workoutId": "knjakjnsdajnk",
+      "workoutId": "aaaknjakjnsdajnk",
       "score": 0
     },
     "zxczxcmnzmxcn": {
       "competitorId": "knczjnkxzcjkn",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 122
     },
     "klasjdlkajsd": {
       "competitorId": "knczjnkxzcjkn",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 112
     },
     "asdnjqwiqwja": {
       "competitorId": "knczjnkxzcjkn",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 332
     },
     "aklsklmasd": {
       "competitorId": "iqwijwijasd",
-      "workoutId": "knjakjnsdajnk",
-      "score": 0
+      "workoutId": "aaaknjakjnsdajnk",
+      "score": 433
     },
     "askldmalksmdasd": {
       "competitorId": "iqwijwijasd",
       "workoutId": "knjadsjknadsjkn",
-      "score": 0
+      "score": 555
     },
     "qwmklqwlkemqwd": {
       "competitorId": "iqwijwijasd",
       "workoutId": "cjxznxcnzcxnjkxjknz",
-      "score": 0
+      "score": 665
     },
     "qwqweqlkdlkqmw": {
       "competitorId": "iqwijwijasd",
       "workoutId": "zcjknczkjnadjknads",
-      "score": 0
+      "score": 121
     }
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import {fetchScores, fetchCompetitors, fetchWorkouts} from '../utils/dataHelpers'
 import {calculateStandings} from '../utils/scoring'
+import {sortObjectsByKey} from '../utils/helpers'
 import Page from '../components/Page'
 import Table from '../components/Table'
 
@@ -43,6 +44,7 @@ class Leaderboard extends React.Component {
     }
     const standings = calculateStandings(this.state.workouts, this.state.scores)
     const {men, women} = this.state.competitors
+    const sortedRxMen = standings(men.rx).sort((a, b) => sortObjectsByKey(a, b, 'standing'))
     return (
       <Page header="Leaderboard" link="/">
         <div className="columns">
@@ -57,7 +59,7 @@ class Leaderboard extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {standings(men.rx).map((man, i) => (
+                {sortedRxMen.map((man, i) => (
                   <tr key={man.id}>
                     <td>{man.standing}</td>
                     <td>

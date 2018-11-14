@@ -78,17 +78,20 @@ export const getScoresForCompetitors = (allScores, competitors) => {
 }
 
 export const calculateTotalScore = competitors => {
-  let tieCounter = competitors.length
+  let rank = 1
   const updatedCompetitors = competitors.map((competitorWithScore, index, originalArr) => {
     const {score, ...competitor} = competitorWithScore
     // check if competitor has a valid score associated
     if (score) {
+      // get true or false on whether this competitor is tied with the previous competitor
       const isTie = calculateTie(competitorWithScore, originalArr, index, 'score')
       if (!isTie) {
-        tieCounter--
-        return {...competitor, totalScore: competitor.totalScore + (index + 1)}
+        // if not a tie, increment the ranking
+        rank = index + 1
+        return {...competitor, totalScore: competitor.totalScore + rank}
       }
-      return {...competitor, totalScore: competitor.totalScore + tieCounter}
+      // if it is a tie, the ranking should stay the same as previous and apply to this person
+      return {...competitor, totalScore: competitor.totalScore + rank}
     }
     // not valid score, add to bottom
     return {...competitor, totalScore: competitor.totalScore + competitors.length}
@@ -97,11 +100,10 @@ export const calculateTotalScore = competitors => {
 }
 
 export const calculateTie = (currCompetitor, array, currIndex, key) => {
+  // check if tie with previous competitor
   if (array[currIndex - 1] && currCompetitor[key] === array[currIndex - 1][key]) {
     return true
   }
-  if (array[currIndex + 1] && currCompetitor[key] === array[currIndex + 1][key]) {
-    return true
-  }
+  // tie with next member doesn't matter because the placing would be the same as not tieing
   return false
 }

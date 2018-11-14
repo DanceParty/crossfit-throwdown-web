@@ -6,6 +6,7 @@ import {
   calculateTotalScore,
   sortCompetitorsListByScore,
   calculateTie,
+  sortObjectsByKey,
 } from './helpers'
 
 export function calculateStandings(workouts, scores) {
@@ -27,15 +28,20 @@ export function calculateStandings(workouts, scores) {
       competitorsWithTotalScore = calculateTotalScore(sortedCompetitors)
     })
     // calculate overall ties
-    let tieCounter = competitorsWithTotalScore.length
-    const competitorsWithStandings = competitorsWithTotalScore.map((competitor, i, origArr) => {
-      const isTie = calculateTie(competitor, origArr, i, 'totalScore')
-      if (isTie) {
+    const sortedCompetitorsWithTotalScore = competitorsWithTotalScore.sort((a, b) =>
+      sortObjectsByKey(a, b, 'totalScore'),
+    )
+    let tieCounter = 1
+    const competitorsWithStandings = sortedCompetitorsWithTotalScore.map(
+      (competitor, i, origArr) => {
+        const isTie = calculateTie(competitor, origArr, i, 'totalScore')
+        if (isTie) {
+          return {...competitor, standing: tieCounter}
+        }
+        tieCounter = i + 1
         return {...competitor, standing: tieCounter}
-      }
-      tieCounter--
-      return {...competitor, standing: i + 1}
-    })
+      },
+    )
     return competitorsWithStandings
   }
 }
