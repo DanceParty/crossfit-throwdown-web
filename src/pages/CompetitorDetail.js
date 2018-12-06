@@ -1,7 +1,10 @@
 import React from 'react'
-import {fetchCompetitor, fetchScores, fetchWorkouts} from '../utils/dataHelpers'
+import {fetchCompetitor, fetchScores, fetchWorkouts, updateCompetitor} from '../utils/dataHelpers'
 import {getWorkoutNamesForScores} from '../utils/helpers'
 import Page from '../components/Page'
+import Table from '../components/Table'
+import Button from '../components/Button'
+import CompetitorForm from '../components/CompetitorForm'
 import ErrorBoundary from '../components/ErrorBoundary'
 
 class CompetitorDetail extends React.Component {
@@ -13,6 +16,7 @@ class CompetitorDetail extends React.Component {
     scores: [],
     isLoading: true,
     error: null,
+    isEditing: false,
   }
 
   componentDidMount() {
@@ -20,8 +24,8 @@ class CompetitorDetail extends React.Component {
   }
 
   fetchData = async () => {
-    const {gender, competitorId} = this.props
     this.setState({isLoading: true})
+    const {gender, competitorId} = this.props
     const {error: competitorErr, data: competitor} = await fetchCompetitor(gender, competitorId)
     const {error: scoresErr, data: scores} = await fetchScores(competitorId)
     const {error: workoutsErr, data: workouts} = await fetchWorkouts()
@@ -42,8 +46,18 @@ class CompetitorDetail extends React.Component {
     })
   }
 
+  toggleEdit = () => {
+    this.setState(({isEditing}) => ({isEditing: !isEditing}))
+  }
+
+  onSubmit = async competitor => {
+    await updateCompetitor(this.props.uri, competitor)
+    this.toggleEdit()
+    this.fetchData()
+  }
+
   render() {
-    const {scores, isLoading, error, ...competitor} = this.state
+    const {scores, isLoading, error, isEditing, ...competitor} = this.state
     return isLoading ? (
       <h1>Loading...</h1>
     ) : error ? (
@@ -51,36 +65,55 @@ class CompetitorDetail extends React.Component {
     ) : (
       <Page header={`${competitor.firstName} ${competitor.lastName}`} link="/competitors">
         <div className="columns">
-          <div className="column">
-            <h1 className="subtitle">Affiliate:</h1>
-            <h1 className="title">{competitor.affiliate}</h1>
-          </div>
-          <div className="column">
-            <h1 className="subtitle">Division:</h1>
-            <h1 className="title">{competitor.division}</h1>
-          </div>
-        </div>
-        <div className="columns">
-          <div className="column">
-            <h1 className="subtitle">Scores:</h1>
-            <ErrorBoundary>
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th>Workout</th>
-                    <th>Score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {scores.map(score => (
-                    <tr key={score.id}>
-                      <td>{score.workoutName}</td>
-                      <td>{score.score}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </ErrorBoundary>
+          <div className="column has-text-centered">
+            {isEditing ? (
+              <CompetitorForm
+                firstName={competitor.firstName}
+                lastName={competitor.lastName}
+                division={competitor.division}
+                gender={this.props.gender}
+                affiliate={competitor.affiliate}
+                onSubmit={this.onSubmit}
+                enableGender={false}
+              />
+            ) : (
+              <>
+                <Button color="light" small onClick={this.toggleEdit}>
+                  Edit
+                </Button>
+                <div className="columns">
+                  <div className="column has-text-centered">
+                    <h1 className="subtitle">Affiliate:</h1>
+                    <h1 className="title">{competitor.affiliate}</h1>
+                  </div>
+                  <div className="column has-text-centered">
+                    <h1 className="subtitle">Division:</h1>
+                    <h1 className="title">{competitor.division}</h1>
+                  </div>
+                  <div className="column has-text-centered">
+                    <h1 className="subtitle">Scores:</h1>
+                    <ErrorBoundary>
+                      <Table className="table">
+                        <thead>
+                          <tr>
+                            <th>Workout</th>
+                            <th>Score</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {scores.map(score => (
+                            <tr key={score.id}>
+                              <td>{score.workoutName}</td>
+                              <td>{score.score}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </Table>
+                    </ErrorBoundary>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </Page>

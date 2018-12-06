@@ -177,6 +177,15 @@ export const postScores = scores => {
   }
 }
 
+export const updateCompetitor = async (url, competitor) => {
+  try {
+    // updates won't override data unless it is present in the object
+    await database.ref(url).update(competitor)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 export const login = async (email, password) => {
   const response = {
     data: null,

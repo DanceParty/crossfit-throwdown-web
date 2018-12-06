@@ -40,6 +40,9 @@ export const fetchWorkout = jest.fn(workoutId => {
     error: null,
   }
 })
+export const fetchCompetitor = jest.fn((gender, id) => {
+  return {data: data.competitors[gender][id], error: null}
+})
 export const login = jest.fn((email, password) => {
   if (email === 'test@test.com' && password === 'test') {
     return {data: {email: 'test@test.com'}, error: null}
