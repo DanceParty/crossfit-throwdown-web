@@ -3,7 +3,7 @@ import 'firebase/database'
 import 'firebase/auth'
 
 console.log(process.env.NODE_ENV)
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' || 'test') {
   firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY_DEV,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN_DEV,

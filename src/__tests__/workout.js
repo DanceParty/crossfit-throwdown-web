@@ -1,7 +1,6 @@
-test('should ', () => {
+test('test', () => {
   expect(true).toEqual(true)
 })
-
 // import React from 'react'
 // import 'jest-dom/extend-expect'
 // import {fireEvent, waitForElement, cleanup, wait} from 'react-testing-library'
