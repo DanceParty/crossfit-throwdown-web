@@ -51,9 +51,11 @@ class CompetitorDetail extends React.Component {
   }
 
   onSubmit = async competitor => {
-    await updateCompetitor(this.props.uri, competitor)
-    this.toggleEdit()
-    this.fetchData()
+    if (competitor.firstName && competitor.lastName && competitor.division) {
+      await updateCompetitor(this.props.uri, competitor)
+      this.toggleEdit()
+      this.fetchData()
+    }
   }
 
   render() {
@@ -79,12 +81,12 @@ class CompetitorDetail extends React.Component {
             ) : (
               <>
                 <Button color="light" small onClick={this.toggleEdit}>
-                  Edit
+                  Edit Competitor
                 </Button>
                 <div className="columns">
                   <div className="column has-text-centered">
                     <h1 className="subtitle">Affiliate:</h1>
-                    <h1 className="title">{competitor.affiliate}</h1>
+                    <h1 className="title">{competitor.affiliate || 'N/A'}</h1>
                   </div>
                   <div className="column has-text-centered">
                     <h1 className="subtitle">Division:</h1>

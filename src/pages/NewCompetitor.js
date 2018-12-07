@@ -23,11 +23,6 @@ class NewCompetitor extends React.Component {
     division: '',
   }
 
-  onChange = event => {
-    const {name, value} = event.target
-    this.setState({[name]: value})
-  }
-
   onSubmit = async (competitor, gender) => {
     if (competitor.firstName && competitor.lastName && competitor.division && gender) {
       await postCompetitor(competitor, gender)

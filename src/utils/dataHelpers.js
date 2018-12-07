@@ -186,6 +186,14 @@ export const updateCompetitor = async (url, competitor) => {
   }
 }
 
+export const updateWorkout = async (url, workout) => {
+  try {
+    await database.ref(url).update(workout)
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 export const login = async (email, password) => {
   const response = {
     data: null,

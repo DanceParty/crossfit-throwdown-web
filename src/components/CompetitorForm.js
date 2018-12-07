@@ -22,7 +22,6 @@ class CompetitorForm extends React.Component {
   onSubmit = async () => {
     const {firstName, lastName, division, gender, affiliate} = this.state
     const competitor = {firstName, lastName, division, affiliate}
-    console.log(gender)
     const genderArg = gender === 'Male' ? 'men' : gender === 'Female' ? 'women' : ''
     await this.props.onSubmit(competitor, genderArg)
   }
