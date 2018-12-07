@@ -55,6 +55,27 @@ describe('viewing workouts', () => {
     expect(getByText('Weight')).toBeInTheDocument()
   })
 
+  test('trying to input letters for scores should not work', async () => {
+    const workoutId = '1'
+    const scores = {
+      '1': {competitorId: '1', workoutId: '1', score: 0},
+      '3': {competitorId: '2', workoutId: '1', score: 0},
+      '5': {competitorId: '3', workoutId: '1', score: 0},
+      '7': {competitorId: '4', workoutId: '1', score: 0},
+    }
+    const {getByText, getByTestId} = renderWithRouter(<App />, {
+      route: `/workouts/${workoutId}`,
+    })
+    await wait()
+
+    fireEvent.click(getByText('Edit Scores'))
+    const scoreInput = getByTestId(`Marco-Polo-input`)
+    fireEvent.change(scoreInput, {
+      target: {value: 'abc'},
+    })
+    expect(scoreInput.value).toEqual('')
+  })
+
   test('changing scores', async () => {
     const workoutId = '1'
     const scores = {
