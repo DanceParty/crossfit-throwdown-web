@@ -4,7 +4,6 @@ import {fireEvent, waitForElement, cleanup, wait} from 'react-testing-library'
 import renderWithRouter from '../utils/testRouter'
 import App from '../App'
 import * as dataHelpers from '../utils/dataHelpers'
-import * as data from '../../seedData.json'
 import {normalizeDataIntoArray} from '../utils/helpers'
 
 afterEach(cleanup)
@@ -50,45 +49,59 @@ describe('viewing workouts', () => {
   test('viewing all workouts', async () => {
     const {getByText} = renderWithRouter(<App />, {route: '/workouts'})
     await wait()
-    const workouts = normalizeDataIntoArray(data.workouts)
-    workouts.forEach(workout => {
-      expect(getByText(workout.name)).toBeInTheDocument()
-      expect(getByText(workout.type)).toBeInTheDocument()
-    })
+    expect(getByText('WOD #1A')).toBeInTheDocument()
+    expect(getByText('WOD #1B')).toBeInTheDocument()
+    expect(getByText('Timed')).toBeInTheDocument()
+    expect(getByText('Weight')).toBeInTheDocument()
   })
 
-  test('changing scores', async () => {
-    const workouts = normalizeDataIntoArray(data.workouts)
-    const scores = normalizeDataIntoArray(data.scores).filter(
-      score => score.workoutId === workouts[0].id,
-    )
-    const competitors = {
-      men: normalizeDataIntoArray(data.competitors.men),
-      women: normalizeDataIntoArray(data.competitors.women),
+  test('trying to input letters for scores should not work', async () => {
+    const workoutId = '1'
+    const scores = {
+      '1': {competitorId: '1', workoutId: '1', score: 0},
+      '3': {competitorId: '2', workoutId: '1', score: 0},
+      '5': {competitorId: '3', workoutId: '1', score: 0},
+      '7': {competitorId: '4', workoutId: '1', score: 0},
     }
     const {getByText, getByTestId} = renderWithRouter(<App />, {
-      route: `/workouts/${workouts[0].id}`,
+      route: `/workouts/${workoutId}`,
     })
     await wait()
 
-    competitors.men.forEach(man => {
-      expect(getByText(`${man.firstName} ${man.lastName}`)).toBeInTheDocument()
+    fireEvent.click(getByText('Edit Scores'))
+    const scoreInput = getByTestId(`Marco-Polo-input`)
+    fireEvent.change(scoreInput, {
+      target: {value: 'abc'},
     })
-    competitors.women.forEach(woman => {
-      expect(getByText(`${woman.firstName} ${woman.lastName}`)).toBeInTheDocument()
+    expect(scoreInput.value).toEqual('')
+  })
+
+  test('changing scores', async () => {
+    const workoutId = '1'
+    const scores = {
+      '1': {competitorId: '1', workoutId: '1', score: 0},
+      '3': {competitorId: '2', workoutId: '1', score: 0},
+      '5': {competitorId: '3', workoutId: '1', score: 0},
+      '7': {competitorId: '4', workoutId: '1', score: 0},
+    }
+    const {getByText, getByTestId} = renderWithRouter(<App />, {
+      route: `/workouts/${workoutId}`,
+    })
+    await wait()
+
+    const allCompetitorsNames = ['Marco Polo', 'Colby Carr', 'Lady Byrnes', 'Julie Dance']
+    const allCompetitorsNamesDashed = ['Marco-Polo', 'Colby-Carr', 'Lady-Byrnes', 'Julie-Dance']
+    allCompetitorsNames.forEach(name => {
+      expect(getByText(`${name}`)).toBeInTheDocument()
     })
 
-    fireEvent.click(getByText('Edit Mode'))
+    fireEvent.click(getByText('Edit Scores'))
 
-    competitors.men.forEach(man => {
-      expect(getByTestId(`${man.firstName}-${man.lastName}-input`)).toBeInTheDocument()
+    allCompetitorsNamesDashed.forEach(name => {
+      expect(getByTestId(`${name}-input`)).toBeInTheDocument()
     })
-    competitors.women.forEach(woman => {
-      expect(getByTestId(`${woman.firstName}-${woman.lastName}-input`)).toBeInTheDocument()
-    })
-    const allCompetitors = competitors.men.concat(competitors.women)
-    allCompetitors.forEach((competitor, i) => {
-      fireEvent.change(getByTestId(`${competitor.firstName}-${competitor.lastName}-input`), {
+    allCompetitorsNamesDashed.forEach((name, i) => {
+      fireEvent.change(getByTestId(`${name}-input`), {
         target: {value: i},
       })
     })
@@ -96,7 +109,7 @@ describe('viewing workouts', () => {
     fireEvent.click(getByText('Save'))
 
     let mockArgs = {}
-    scores.forEach((scoreObj, i) => {
+    normalizeDataIntoArray(scores).forEach((scoreObj, i) => {
       const {competitorId, workoutId} = scoreObj
       mockArgs[`scores/${scoreObj.id}`] = {
         competitorId,
@@ -108,6 +121,62 @@ describe('viewing workouts', () => {
     expect(dataHelpers.postScores).toHaveBeenCalledTimes(1)
     dataHelpers.postScores.mock.calls.forEach(args => {
       expect(args[0]).toEqual(mockArgs)
+    })
+  })
+
+  test('viewing and editing a workout', async () => {
+    const workoutId = '1'
+    const workout = {
+      name: 'WOD #1A',
+      rx: ['500m Row'],
+      scaled: ['500m Row'],
+      standards:
+        'Athletes will have 3 minutes to complete the row. If the athlete does not complete the prescribed work within the 3 minute time cap, their score will be the amount of work completed at the time cap. Athletes will not advance to the next segment until the allotted 3 minutes has expired.',
+      type: 'Timed',
+    }
+    const {getByText, getByLabelText, getByTestId} = renderWithRouter(<App />, {
+      route: `/workouts/${workoutId}`,
+    })
+    await waitForElement(() => getByText(/WOD #1A/))
+
+    expect(getByText(/WOD #1A/)).toBeInTheDocument()
+    expect(getByText(workout.standards)).toBeInTheDocument()
+    expect(getByText(workout.type)).toBeInTheDocument()
+    workout.rx.forEach(step => {
+      expect(getByText(step)).toBeInTheDocument()
+    })
+    workout.scaled.forEach(step => {
+      expect(getByText(step)).toBeInTheDocument()
+    })
+
+    // edit
+    fireEvent.click(getByText('Edit Workout'))
+    const nameInput = getByLabelText('Name*')
+    const standardsInput = getByTestId('standards-input')
+    const typeInput = getByTestId('type-select')
+    expect(nameInput.value).toEqual(workout.name)
+    expect(standardsInput.value).toEqual(workout.standards)
+    expect(typeInput.value).toEqual(workout.type)
+    fireEvent.change(nameInput, {target: {value: 'Grinch #1'}})
+    fireEvent.change(standardsInput, {target: {value: 'Stole XMAS'}})
+    fireEvent.change(typeInput, {target: {value: 'Weight'}})
+    expect(nameInput.value).toEqual('Grinch #1')
+    expect(standardsInput.value).toEqual('Stole XMAS')
+    expect(typeInput.value).toEqual('Weight')
+    const submitButton = getByText('Submit')
+    fireEvent.click(submitButton)
+    await wait()
+    expect(submitButton).not.toBeInTheDocument()
+    expect(dataHelpers.updateWorkout).toHaveBeenCalledTimes(1)
+    dataHelpers.updateWorkout.mock.calls.forEach(args => {
+      expect(args[0]).toEqual('/workouts/1')
+      expect(args[1]).toEqual({
+        name: 'Grinch #1',
+        standards: 'Stole XMAS',
+        type: 'Weight',
+        rx: ['500m Row'],
+        scaled: ['500m Row'],
+      })
     })
   })
 })

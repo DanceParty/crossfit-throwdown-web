@@ -29,6 +29,7 @@ const ScoreTable = ({competitors, scores, workoutType, isEditing, onChangeScore}
                     value={score.score}
                     onChange={onChangeScore}
                     small
+                    type="number"
                     testId={`${competitor.firstName}-${competitor.lastName}-input`}
                   />
                 </td>

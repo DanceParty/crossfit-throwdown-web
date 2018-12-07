@@ -1,15 +1,23 @@
 import React from 'react'
-import {fetchWorkout, fetchScores, fetchCompetitors, postScores} from '../utils/dataHelpers'
+import {
+  fetchWorkout,
+  fetchScores,
+  fetchCompetitors,
+  postScores,
+  updateWorkout,
+} from '../utils/dataHelpers'
 import Page from '../components/Page'
 import ScoreTable from '../components/ScoreTable'
 import Button from '../components/Button'
+import WorkoutForm from '../components/WorkoutForm'
 
 export default class WorkoutDetail extends React.Component {
   state = {
     workout: [],
     scores: [],
     competitors: {},
-    isEditing: false,
+    isEditingScores: false,
+    isEditingWorkout: false,
     isLoading: true,
     error: null,
   }
@@ -37,7 +45,7 @@ export default class WorkoutDetail extends React.Component {
     })
   }
 
-  onSubmit = () => {
+  onSubmitScores = () => {
     const {scores} = this.state
     let newScores = {}
     scores.forEach(scoreObj => {
@@ -49,7 +57,7 @@ export default class WorkoutDetail extends React.Component {
       }
     })
     postScores(newScores)
-    this.setState({isEditing: false})
+    this.setState({isEditingScores: false})
   }
 
   onChangeScore = event => {
@@ -61,12 +69,40 @@ export default class WorkoutDetail extends React.Component {
     this.setState({scores: updatedScores})
   }
 
-  toggleEditMode = () => {
-    this.setState(({isEditing}) => ({isEditing: !isEditing}))
+  toggleEditScores = () => {
+    this.setState(({isEditingScores}) => ({isEditingScores: !isEditingScores}))
+  }
+
+  toggleEditWorkout = () => {
+    this.setState(({isEditingWorkout}) => ({isEditingWorkout: !isEditingWorkout}))
+  }
+
+  onSubmitWorkout = async workout => {
+    if (
+      workout.name &&
+      workout.standards &&
+      workout.type &&
+      workout.rx.length > 0 &&
+      workout.scaled.length > 0
+    ) {
+      await updateWorkout(this.props.uri, workout)
+      this.toggleEditWorkout()
+      this.fetchData()
+    } else {
+      // no -op
+    }
   }
 
   render() {
-    const {workout, scores, competitors, isEditing, isLoading, error} = this.state
+    const {
+      workout,
+      scores,
+      competitors,
+      isEditingScores,
+      isEditingWorkout,
+      isLoading,
+      error,
+    } = this.state
     return isLoading ? (
       <h1>Loading...</h1>
     ) : error ? (
@@ -75,47 +111,67 @@ export default class WorkoutDetail extends React.Component {
       <Page header={workout.name} link="/workouts">
         <div className="columns">
           <div className="column has-text-centered">
-            <h1 className="subtitle">
-              <b>{workout.type}</b>
-            </h1>
-          </div>
-        </div>
-        <div className="columns">
-          <div className="column has-text-centered">
-            <h1 className="subtitle">Workout Standards</h1>
-            <p>{workout.standards}</p>
-          </div>
-        </div>
-        <div className="columns">
-          <div className="column has-text-centered">
-            <h1 className="subtitle">RX</h1>
-            {workout.rx.map(({key, step}) => (
-              <p key={key}>{step}</p>
-            ))}
-          </div>
-          <div className="column has-text-centered">
-            <h1 className="subtitle">Scaled</h1>
-            {workout.scaled.map(({key, step}) => (
-              <p key={key}>{step}</p>
-            ))}
+            {isEditingWorkout ? (
+              <WorkoutForm
+                name={workout.name}
+                type={workout.type}
+                standards={workout.standards}
+                rx={workout.rx.map(obj => obj.step)}
+                scaled={workout.scaled.map(obj => obj.step)}
+                onSubmit={this.onSubmitWorkout}
+              />
+            ) : (
+              <>
+                <Button color="light" small onClick={this.toggleEditWorkout}>
+                  Edit Workout
+                </Button>
+                <br />
+                <br />
+                <div className="columns">
+                  <div className="column has-text-centered">
+                    <h1 className="subtitle is-2">
+                      <b>{workout.type}</b>
+                    </h1>
+                  </div>
+                </div>
+                <div className="columns">
+                  <div className="column has-text-centered">
+                    <h1 className="subtitle is-4">Workout Standards</h1>
+                    <p>{workout.standards}</p>
+                  </div>
+                  <div className="column has-text-centered">
+                    <h1 className="subtitle is-4">RX</h1>
+                    {workout.rx.map(({key, step}) => (
+                      <p key={key}>{step}</p>
+                    ))}
+                  </div>
+                  <div className="column has-text-centered">
+                    <h1 className="subtitle is-4">Scaled</h1>
+                    {workout.scaled.map(({key, step}) => (
+                      <p key={key}>{step}</p>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
         <hr />
         <div className="columns">
           <div className="column has-text-centered">
-            {isEditing ? (
+            {isEditingScores ? (
               <>
-                <Button color="danger" small onClick={this.toggleEditMode} danger>
+                <Button color="danger" small onClick={this.toggleEditScores} danger>
                   Cancel
                 </Button>
                 {` `}
-                <Button color="success" small onClick={this.onSubmit}>
+                <Button color="success" small onClick={this.onSubmitScores}>
                   Save{' '}
                 </Button>
               </>
             ) : (
-              <Button color="light" small onClick={this.toggleEditMode}>
-                Edit Mode
+              <Button color="light" small onClick={this.toggleEditScores}>
+                Edit Scores
               </Button>
             )}
           </div>
@@ -127,7 +183,7 @@ export default class WorkoutDetail extends React.Component {
               competitors={competitors.men.rx}
               scores={scores}
               workoutType={workout.type}
-              isEditing={isEditing}
+              isEditing={isEditingScores}
               onChangeScore={this.onChangeScore}
             />
           </div>
@@ -137,7 +193,7 @@ export default class WorkoutDetail extends React.Component {
               competitors={competitors.men.scaled}
               scores={scores}
               workoutType={workout.type}
-              isEditing={isEditing}
+              isEditing={isEditingScores}
               onChangeScore={this.onChangeScore}
             />
           </div>
@@ -147,7 +203,7 @@ export default class WorkoutDetail extends React.Component {
               competitors={competitors.women.rx}
               scores={scores}
               workoutType={workout.type}
-              isEditing={isEditing}
+              isEditing={isEditingScores}
               onChangeScore={this.onChangeScore}
             />
           </div>
@@ -157,7 +213,7 @@ export default class WorkoutDetail extends React.Component {
               competitors={competitors.women.scaled}
               scores={scores}
               workoutType={workout.type}
-              isEditing={isEditing}
+              isEditing={isEditingScores}
               onChangeScore={this.onChangeScore}
             />
           </div>
