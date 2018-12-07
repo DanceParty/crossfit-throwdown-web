@@ -33,6 +33,7 @@ class Login extends React.Component {
               label="Password"
               value={this.state.password}
               name="password"
+              type="password"
               onChange={this.onChange}
             />
           </div>

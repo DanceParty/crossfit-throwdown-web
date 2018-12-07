@@ -10,7 +10,7 @@ const Input = ({label, small = false, testId = '', ...props}) => {
           <input
             {...props}
             aria-labelledby={props.name}
-            type={props.name === 'password' ? 'password' : 'text'}
+            type={props.type || 'text'}
             className={className}
             data-testid={testId}
           />
