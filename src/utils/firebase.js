@@ -11,7 +11,7 @@ if (process.env.NODE_ENV === 'development' || 'test') {
     storageBucket: process.env.REACT_APP_STORAGE_BUCKET_DEV,
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID_DEV,
   })
-} else if (process.env.NODE_ENV === 'production') {
+} else {
   firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
