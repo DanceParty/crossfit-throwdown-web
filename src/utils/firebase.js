@@ -4,6 +4,7 @@ import 'firebase/auth'
 
 console.log(process.env)
 if (process.env.NODE_ENV === 'development' || 'test') {
+  console.log('sinde development')
   firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY_DEV,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN_DEV,
@@ -13,6 +14,8 @@ if (process.env.NODE_ENV === 'development' || 'test') {
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID_DEV,
   })
 } else {
+  console.log(process.env)
+  console.log('inside else')
   firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -21,6 +24,7 @@ if (process.env.NODE_ENV === 'development' || 'test') {
     storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   })
+  console.log(firebase)
 }
 const database = firebase.database()
 
