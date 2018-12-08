@@ -29,7 +29,7 @@ class NewWorkout extends React.Component {
       workout.type &&
       workout.standards &&
       workout.rx.length > 0 &&
-      workout.scaled.length > 1
+      workout.scaled.length > 0
     ) {
       await postWorkout(workout)
       this.handleOpenSuccess()

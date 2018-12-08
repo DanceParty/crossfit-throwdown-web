@@ -2,7 +2,6 @@ import firebase from 'firebase/app'
 import 'firebase/database'
 import 'firebase/auth'
 
-console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development' || 'test') {
   firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY_DEV,
