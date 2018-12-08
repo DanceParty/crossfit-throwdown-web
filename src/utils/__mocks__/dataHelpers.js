@@ -44,7 +44,7 @@ export const fetchScores = jest.fn((competitorId, workoutId) => {
 })
 
 export const fetchWorkout = jest.fn(workoutId => {
-  const workout = workouts[workoutId]
+  const workout = Object.assign({}, workouts[workoutId])
   workout.rx = workout.rx.map((step, i) => ({key: i, step}))
   workout.scaled = workout.scaled.map((step, i) => ({key: i, step}))
   return {
