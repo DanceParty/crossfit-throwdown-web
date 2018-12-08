@@ -73,7 +73,7 @@ export function sortCompetitorsByTimedWorkout(competitors, scores) {
   return [...sortedCompetitors, ...invalidCompetitors]
 }
 
-function splitScoresByValidity(competitors, scores) {
+export function splitScoresByValidity(competitors, scores) {
   // get scores with that are valid (not zero)
   const validScores = scores.filter(score =>
     competitors.some(competitor => competitor.id === score.competitorId && score.score !== 0),

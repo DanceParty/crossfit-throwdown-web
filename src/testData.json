@@ -1,0 +1,40 @@
+{
+  "workouts": {
+    "1": {
+      "name": "WOD #1A",
+      "rx": ["500m Row"],
+      "scaled": ["500m Row"],
+      "standards":
+        "Athletes will have 3 minutes to complete the row. If the athlete does not complete the prescribed work within the 3 minute time cap, their score will be the amount of work completed at the time cap. Athletes will not advance to the next segment until the allotted 3 minutes has expired.",
+      "type": "Timed"
+    },
+    "2": {
+      "name": "WOD #1B",
+      "rx": ["40/30 Calorie Assault Bike", "20 minute Jog"],
+      "scaled": ["100000 jumping jacks", "backwards bicycle ride"],
+      "standards":
+        "Athletes will have 3 minutes to complete the bike. If the athlete does not complete the prescribed work within the 3 minute time cap, their score will be the amount of work completed at the time cap. Athletes will not advance to the next segment until the allotted 3 minutes has expired. Men in both divisions will complete 40 calories on the Assault Bike and women will complete 30 calories.",
+      "type": "Weight"
+    }
+  },
+  "competitors": {
+    "men": {
+      "1": { "firstName": "Marco", "lastName": "Polo", "affiliate": "", "division": "RX" },
+      "2": { "firstName": "Colby", "lastName": "Carr", "affiliate": "Crossfit Yuma", "division": "Scaled" }
+    },
+    "women": {
+      "3": { "firstName": "Lady", "lastName": "Byrnes", "affiliate": "", "division": "RX" },
+      "4": { "firstName": "Julie", "lastName": "Dance", "affiliate": "Crossfit Sideways", "division": "Scaled" }
+    }
+  },
+  "scores": {
+    "1": {"competitorId": "1", "workoutId": "1", "score": 0},
+    "2": {"competitorId": "1", "workoutId": "2", "score": 0},
+    "3": {"competitorId": "2", "workoutId": "1", "score": 0},
+    "4": {"competitorId": "2", "workoutId": "2", "score": 0},
+    "5": {"competitorId": "3", "workoutId": "1", "score": 0},
+    "6": {"competitorId": "3", "workoutId": "2", "score": 0},
+    "7": {"competitorId": "4", "workoutId": "1", "score": 0},
+    "8": {"competitorId": "4", "workoutId": "2", "score": 0}
+  }
+}

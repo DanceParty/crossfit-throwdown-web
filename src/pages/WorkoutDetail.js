@@ -36,6 +36,7 @@ export default class WorkoutDetail extends React.Component {
       workoutErr || scoresErr || competitorsErr
         ? {errors: {workoutErr, scoresErr, competitorsErr}}
         : null
+
     this.setState({
       workout,
       scores,
@@ -116,8 +117,8 @@ export default class WorkoutDetail extends React.Component {
                 name={workout.name}
                 type={workout.type}
                 standards={workout.standards}
-                rx={workout.rx.map(obj => obj.step)}
-                scaled={workout.scaled.map(obj => obj.step)}
+                rx={workout.rx.map(({step}) => step)}
+                scaled={workout.scaled.map(({step}) => step)}
                 onSubmit={this.onSubmitWorkout}
               />
             ) : (

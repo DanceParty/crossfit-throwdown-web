@@ -55,7 +55,6 @@ class Leaderboard extends React.Component {
                 <tr>
                   <th>Rank</th>
                   <th>Name</th>
-                  <th>Score</th>
                 </tr>
               </thead>
               <tbody>
@@ -65,7 +64,6 @@ class Leaderboard extends React.Component {
                     <td>
                       {man.firstName} {man.lastName}
                     </td>
-                    <td>{man.totalScore}</td>
                   </tr>
                 ))}
               </tbody>
@@ -78,7 +76,6 @@ class Leaderboard extends React.Component {
                 <tr>
                   <th>Rank</th>
                   <th>Name</th>
-                  <th>Score</th>
                 </tr>
               </thead>
               <tbody>
@@ -88,7 +85,6 @@ class Leaderboard extends React.Component {
                     <td>
                       {woman.firstName} {woman.lastName}
                     </td>
-                    <td>{woman.totalScore}</td>
                   </tr>
                 ))}
               </tbody>
@@ -101,7 +97,6 @@ class Leaderboard extends React.Component {
                 <tr>
                   <th>Rank</th>
                   <th>Name</th>
-                  <th>Points</th>
                 </tr>
               </thead>
               <tbody>
@@ -111,7 +106,6 @@ class Leaderboard extends React.Component {
                     <td>
                       {man.firstName} {man.lastName}
                     </td>
-                    <td>{man.totalScore}</td>
                   </tr>
                 ))}
               </tbody>
@@ -124,7 +118,6 @@ class Leaderboard extends React.Component {
                 <tr>
                   <th>Rank</th>
                   <th>Name</th>
-                  <th>Points</th>
                 </tr>
               </thead>
               <tbody>
@@ -134,7 +127,6 @@ class Leaderboard extends React.Component {
                     <td>
                       {woman.firstName} {woman.lastName}
                     </td>
-                    <td>{woman.totalScore}</td>
                   </tr>
                 ))}
               </tbody>
