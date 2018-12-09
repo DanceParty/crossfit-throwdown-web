@@ -2,9 +2,7 @@ import firebase from 'firebase/app'
 import 'firebase/database'
 import 'firebase/auth'
 
-console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
-  console.log('inside development / test')
   firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY_DEV,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN_DEV,
@@ -14,7 +12,6 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID_DEV,
   })
 } else {
-  console.log('inside production')
   firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
