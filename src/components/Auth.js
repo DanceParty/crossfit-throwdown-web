@@ -1,6 +1,6 @@
 import React from 'react'
 import Login from '../pages/Login'
-import {login, checkCurrentUser} from '../utils/dataHelpers'
+import {login, checkCurrentUser} from '../utils/api'
 
 class Auth extends React.Component {
   state = {

@@ -3,12 +3,12 @@ import 'jest-dom/extend-expect'
 import {waitForElement, cleanup} from 'react-testing-library'
 import renderWithRouter from '../utils/testRouter'
 import App from '../App'
-import * as dataHelpers from '../utils/dataHelpers'
+import * as api from '../utils/api'
 import * as data from '../testData.json'
 
 afterEach(cleanup)
 
-jest.mock('../utils/dataHelpers')
+jest.mock('../utils/api')
 
 describe('Competitors', () => {
   const ROUTE = '/competitors'
@@ -39,6 +39,6 @@ describe('Competitors', () => {
       expect(render.getByText(`${competitor.firstName} ${competitor.lastName}`)).toBeInTheDocument()
     })
 
-    expect(dataHelpers.fetchCompetitors).toHaveBeenCalledTimes(1)
+    expect(api.fetchCompetitors).toHaveBeenCalledTimes(1)
   })
 })

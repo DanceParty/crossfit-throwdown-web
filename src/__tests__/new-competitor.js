@@ -3,11 +3,11 @@ import 'jest-dom/extend-expect'
 import {fireEvent, waitForElement, cleanup, wait} from 'react-testing-library'
 import renderWithRouter from '../utils/testRouter'
 import App from '../App'
-import * as dataHelpers from '../utils/dataHelpers'
+import * as api from '../utils/api'
 
 afterEach(cleanup)
 
-jest.mock('../utils/dataHelpers')
+jest.mock('../utils/api')
 
 describe('New Competitor', () => {
   const ROUTE = '/new-competitor'
@@ -59,9 +59,9 @@ describe('New Competitor', () => {
 
     await waitForElement(() => render.getByText(successText))
 
-    expect(dataHelpers.postCompetitor).toHaveBeenCalledTimes(1)
+    expect(api.postCompetitor).toHaveBeenCalledTimes(1)
 
-    dataHelpers.postCompetitor.mock.calls.forEach(args => {
+    api.postCompetitor.mock.calls.forEach(args => {
       expect(args).toEqual(expectedArgs)
     })
   })

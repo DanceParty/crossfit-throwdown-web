@@ -1,5 +1,5 @@
 import React from 'react'
-import {postCompetitor} from '../utils/dataHelpers'
+import {postCompetitor} from '../utils/api'
 import Page from '../components/Page'
 import CompetitorForm from '../components/CompetitorForm'
 import Notification from '../components/Notification'

@@ -1,5 +1,5 @@
 import React from 'react'
-import {fetchCompetitor, fetchScores, fetchWorkouts, updateCompetitor} from '../utils/dataHelpers'
+import {getCompetitor, fetchScores, fetchWorkouts, updateCompetitor} from '../utils/api'
 import {getWorkoutNamesForScores} from '../utils/helpers'
 import Page from '../components/Page'
 import Table from '../components/Table'
@@ -26,13 +26,13 @@ class CompetitorDetail extends React.Component {
   fetchData = async () => {
     this.setState({isLoading: true})
     const {gender, competitorId} = this.props
-    const {error: competitorErr, data: competitor} = await fetchCompetitor(gender, competitorId)
+    const [competitorError, competitor] = await getCompetitor(gender, competitorId)
     const {error: scoresErr, data: scores} = await fetchScores(competitorId)
     const {error: workoutsErr, data: workouts} = await fetchWorkouts()
 
     const collectedErrors =
-      competitorErr || scoresErr || workoutsErr
-        ? {errors: {competitorErr, scoresErr, workoutsErr}}
+      competitorError || scoresErr || workoutsErr
+        ? {errors: {competitorError, scoresErr, workoutsErr}}
         : null
 
     this.setState({

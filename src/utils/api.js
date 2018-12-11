@@ -75,6 +75,28 @@ export const fetchScores = async (competitorId, workoutId) => {
   return response
 }
 
+export const getScores = async (competitorId, workoutId) => {
+  try {
+    let data = database.ref('scores')
+    if (competitorId) {
+      data = data
+        .orderByChild('competitorId')
+        .equalTo(competitorId)
+        .once('value')
+    } else if (workoutId) {
+      data = data
+        .orderByChild('workoutId')
+        .equalTo(workoutId)
+        .once('value')
+    } else {
+      data = data.once('value')
+    }
+    return [null, data.val()]
+  } catch (e) {
+    return [e]
+  }
+}
+
 export const fetchCompetitor = async (gender, id) => {
   const response = {
     data: null,
@@ -87,6 +109,15 @@ export const fetchCompetitor = async (gender, id) => {
     response.error = e
   }
   return response
+}
+
+export const getCompetitor = async (gender, id) => {
+  try {
+    const data = await database.ref(`competitors/${gender}/${id}`).once('value')
+    return [null, data.val()]
+  } catch (e) {
+    return [e]
+  }
 }
 
 export const fetchWorkout = async id => {

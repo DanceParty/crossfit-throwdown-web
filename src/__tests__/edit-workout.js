@@ -3,12 +3,12 @@ import 'jest-dom/extend-expect'
 import {waitForElement, cleanup, fireEvent, wait} from 'react-testing-library'
 import renderWithRouter from '../utils/testRouter'
 import App from '../App'
-import * as dataHelpers from '../utils/dataHelpers'
+import * as api from '../utils/api'
 import * as data from '../testData.json'
 
 afterEach(cleanup)
 
-jest.mock('../utils/dataHelpers')
+jest.mock('../utils/api')
 
 describe('Edit Workout', () => {
   const {workouts} = data
@@ -91,9 +91,9 @@ describe('Edit Workout', () => {
 
     expect(submitButton).not.toBeInTheDocument()
 
-    expect(dataHelpers.updateWorkout).toHaveBeenCalledTimes(1)
+    expect(api.updateWorkout).toHaveBeenCalledTimes(1)
 
-    dataHelpers.postWorkout.mock.calls.forEach(args => {
+    api.postWorkout.mock.calls.forEach(args => {
       expect(args).toEqual(expectedArgs)
     })
   })

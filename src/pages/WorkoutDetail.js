@@ -5,7 +5,7 @@ import {
   fetchCompetitors,
   postScores,
   updateWorkout,
-} from '../utils/dataHelpers'
+} from '../utils/api'
 import Page from '../components/Page'
 import ScoreTable from '../components/ScoreTable'
 import Button from '../components/Button'

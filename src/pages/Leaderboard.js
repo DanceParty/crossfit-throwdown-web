@@ -1,5 +1,5 @@
 import React from 'react'
-import {fetchScores, fetchCompetitors, fetchWorkouts} from '../utils/dataHelpers'
+import {fetchScores, fetchCompetitors, fetchWorkouts} from '../utils/api'
 import {calculateStandings} from '../utils/scoring'
 import {sortObjectsByKey} from '../utils/helpers'
 import Page from '../components/Page'

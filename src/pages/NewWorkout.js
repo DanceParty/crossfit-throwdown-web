@@ -1,5 +1,5 @@
 import React from 'react'
-import {postWorkout} from '../utils/dataHelpers'
+import {postWorkout} from '../utils/api'
 import Notification from '../components/Notification'
 import Page from '../components/Page'
 import WorkoutForm from '../components/WorkoutForm'

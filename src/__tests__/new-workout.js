@@ -3,11 +3,11 @@ import 'jest-dom/extend-expect'
 import {fireEvent, waitForElement, cleanup, wait} from 'react-testing-library'
 import renderWithRouter from '../utils/testRouter'
 import App from '../App'
-import * as dataHelpers from '../utils/dataHelpers'
+import * as api from '../utils/api'
 
 afterEach(cleanup)
 
-jest.mock('../utils/dataHelpers')
+jest.mock('../utils/api')
 
 describe('New Workout', () => {
   const ROUTE = '/new-workout'
@@ -70,9 +70,9 @@ describe('New Workout', () => {
 
     await waitForElement(() => render.getByText(successText))
 
-    expect(dataHelpers.postWorkout).toHaveBeenCalledTimes(1)
+    expect(api.postWorkout).toHaveBeenCalledTimes(1)
 
-    dataHelpers.postWorkout.mock.calls.forEach(args => {
+    api.postWorkout.mock.calls.forEach(args => {
       expect(args).toEqual(expectedArgs)
     })
   })

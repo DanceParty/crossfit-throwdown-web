@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import {navigate} from '@reach/router'
-import {fetchWorkouts} from '../utils/dataHelpers'
+import {fetchWorkouts} from '../utils/api'
 import Page from '../components/Page'
 import Table from '../components/Table'
 
